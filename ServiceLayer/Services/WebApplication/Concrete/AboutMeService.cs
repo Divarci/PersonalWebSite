@@ -49,7 +49,12 @@ namespace ServiceLayer.Services.WebApplication.Concrete
             {
                 //creates new image
                 var imageUpload = await _imageHelper.ImageUpload(request.Title, request.Photo, ImageType.User, null);
-                request.FileName = imageUpload.FileName;
+                if (imageUpload.Error != null)
+                {
+                    _toasty.AddErrorToastMessage(_message.ImageError(), new ToastrOptions { Title = "Opps!" });
+                    return;
+                }
+                request.FileName = imageUpload.FileName!;
                 request.FileType = request.Photo.ContentType;
             }
 
@@ -83,12 +88,17 @@ namespace ServiceLayer.Services.WebApplication.Concrete
         {
             //creates new image
             var imageUpload = await _imageHelper.ImageUpload(request.Title, request.Photo, ImageType.User, null);
-            request.FileName = imageUpload.FileName;
+            if (imageUpload.Error != null)
+            {
+                _toasty.AddErrorToastMessage(_message.ImageError(), new ToastrOptions { Title = "Opps!" });
+                return;
+            }
+            request.FileName = imageUpload.FileName!;
             request.FileType = request.Photo.ContentType;
 
             //try to create new aboutme data for db
             var editableRresume = await _unitOfWork.GetGenericRepository<Resume>().Where(x => x.IsEdited == true).ProjectTo<ResumeIdVM>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();
-            request.ResumeId = editableRresume.Id;
+            request.ResumeId = editableRresume!.Id;
             request.IsPublished = editableRresume.IsPublished;
 
             var aboutMe = _mapper.Map<AboutMe>(request);
@@ -98,7 +108,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
             if (errorMessage != string.Empty)
             {
                 //if exception, uploaded image deleted
-                _imageHelper.Delete(imageUpload.FileName);
+                _imageHelper.Delete(imageUpload.FileName!);
                 _toasty.AddErrorToastMessage(errorMessage, new ToastrOptions { Title = "Oppps" });
                 return;
             }

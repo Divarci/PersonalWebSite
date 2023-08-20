@@ -53,7 +53,7 @@ namespace ServiceLayer.Services.Identity.Concrete
             var claims = await _userManager.GetClaimsAsync(user);
             var existingClaim = claims.First(x => x.Type.ToString() == "TrialExpireDate");
 
-            var newClaim = new Claim("TrialExpireDate", DateTime.Now.AddDays(1).ToString());
+            var newClaim = new Claim("TrialExpireDate", DateTime.Now.AddDays(180).ToString());
 
             var renewClaimResult = await _userManager.ReplaceClaimAsync(user, existingClaim,newClaim);
             if (!renewClaimResult.Succeeded)
@@ -72,7 +72,7 @@ namespace ServiceLayer.Services.Identity.Concrete
             var claims = await _userManager.GetClaimsAsync(user);
             var existingClaim = claims.First(x => x.Type.ToString() == "AdminObserveExpireDate");
 
-            var newClaim = new Claim("AdminObserveExpireDate", DateTime.Now.AddDays(1).ToString());
+            var newClaim = new Claim("AdminObserveExpireDate", DateTime.Now.AddDays(7).ToString());
 
             var renewClaimResult = await _userManager.ReplaceClaimAsync(user, existingClaim, newClaim);
             if (!renewClaimResult.Succeeded)

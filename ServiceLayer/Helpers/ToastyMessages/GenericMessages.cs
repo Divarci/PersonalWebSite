@@ -7,6 +7,7 @@
         string Update(string Title);
         string Delete(string Title);
         string Denied();
+        string ImageError();
     }
 
     //toast message class
@@ -27,6 +28,10 @@
         public string Denied()
         {
             return "Operation Unsuccesful!";
+        }
+        public string ImageError()
+        {
+            return "You have to upload a JPG,JPeG or PNG file!";
         }
 
     }

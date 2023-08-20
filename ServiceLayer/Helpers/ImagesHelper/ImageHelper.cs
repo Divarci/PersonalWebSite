@@ -113,6 +113,10 @@ namespace ServiceLayer.Helpers.ImagesHelper
 
             //name fixing area
             string fileExtension = Path.GetExtension(imageFile.FileName);
+            if(fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png")
+            {
+                return new GenericImageVM { Error = "You have to upload a JPG,JPEG or PNG" };
+            }
             string oldFileName = Path.GetFileNameWithoutExtension(imageFile.FileName);
             name = ReplaceInvalidChars(name) + "_" + ReplaceInvalidChars(oldFileName);
             DateTime datetime = DateTime.Now;

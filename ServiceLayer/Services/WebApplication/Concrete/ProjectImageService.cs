@@ -48,9 +48,13 @@ namespace ServiceLayer.Services.WebApplication.Concrete
         {
             //creates new image
             var imageUpload = await _imageHelper.ImageUpload(request.Title, request.Photo, ImageType.Project, null);
-
+            if (imageUpload.Error != null)
+            {
+                _toasty.AddErrorToastMessage(_messages.ImageError(), new ToastrOptions { Title = "Opps!" });
+                return;
+            }
             //try to create new aboutme data for db
-            request.FileName = imageUpload.FileName;
+            request.FileName = imageUpload.FileName!;
             request.FileType = request.Photo.ContentType;
 
             var image = _mapper.Map<ProjectImage>(request);
@@ -59,7 +63,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
             if (errorMessage != string.Empty)
             {
                 //if exception, uploaded image deleted
-                _imageHelper.Delete(imageUpload.FileName);
+                _imageHelper.Delete(imageUpload.FileName!);
                 _toasty.AddErrorToastMessage(errorMessage, new ToastrOptions { Title = "Opps!" });
                 return;
             }
@@ -80,7 +84,12 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
             //creates new image
             var imageUpload = await _imageHelper.ImageUpload(imageOld.Project.Title, request.Photo, ImageType.Project, null);
-            request.FileName = imageUpload.FileName;
+            if (imageUpload.Error != null)
+            {
+                _toasty.AddErrorToastMessage(_messages.ImageError(), new ToastrOptions { Title = "Opps!" });
+                return;
+            }
+            request.FileName = imageUpload.FileName!;
             request.FileType = request.Photo.ContentType;
 
             //try to create aboutme data for db
@@ -90,7 +99,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
             if (errorMessage != string.Empty)
             {
                 //if exception, uploaded image deleted
-                _imageHelper.Delete(imageUpload.FileName);
+                _imageHelper.Delete(imageUpload.FileName!);
                 _toasty.AddErrorToastMessage(errorMessage, new ToastrOptions { Title = "Opps!" });
                 return;
             }

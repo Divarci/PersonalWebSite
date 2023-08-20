@@ -68,16 +68,14 @@ namespace PortfolioWithBlog.Areas.Admin.Controllers
         public async Task<IActionResult> AboutMeUpdateWithAllChildren(AboutMeUpdateVM request)
         {
             var resultAboutMe = await _validatorUpdate.ValidateAsync(request);
-            if (resultAboutMe.IsValid)
-            {
-                await _aboutMeService.UpdateAboutMeAsync(request);
-                return RedirectToAction("AboutMeListWithAllChildren", "AboutMe", new { Area = ("Admin") });
-            }
-            else
+            if (!resultAboutMe.IsValid)
             {
                 resultAboutMe.AddToModelState(this.ModelState);
                 return View();
             }
+
+            await _aboutMeService.UpdateAboutMeAsync(request);
+            return RedirectToAction("AboutMeListWithAllChildren", "AboutMe", new { Area = ("Admin") });
         }
 
         //Delete

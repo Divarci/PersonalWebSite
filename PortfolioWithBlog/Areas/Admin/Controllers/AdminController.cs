@@ -6,7 +6,7 @@ using ServiceLayer.Services.Identity.Abstract;
 
 namespace PortfolioWithBlog.Areas.Admin.Controllers
 {
-    [Authorize(Policy = "AdminObserverPolicy")]
+    
     [Area("Admin")]
     public class AdminController : Controller
     {

@@ -48,11 +48,16 @@ namespace ServiceLayer.Services.WebApplication.Concrete
         {
             //creates new image           
             var imageUploadResume = await _imageHelper.ImageUpload(request.FullName, request.PhotoResumeCv, ImageType.Resume, null);
+            if (imageUploadResume.Error != null)
+            {
+                _toasty.AddErrorToastMessage(_messages.ImageError(), new ToastrOptions { Title = "Opps!" });
+                return;
+            }
             request.ResumeCvFileName = imageUploadResume.FileName;
             request.ResumeCvFileType = request.PhotoResumeCv.ContentType;
 
             //try to create new aboutme data for db
-            var editableResume = await _unitOfWork.GetGenericRepository<Resume>().Where(x => x.IsEdited == true).ProjectTo<ResumeIdVM>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();
+            var editableResume = await _unitOfWork.GetGenericRepository<Resume>().Where(x => x.IsEdited == true).ProjectTo<ResumeIdVM>(_mapper.ConfigurationProvider).SingleAsync();
             request.ResumeId = editableResume.Id;
             request.IsPublished = editableResume.IsPublished;
 
@@ -62,7 +67,7 @@ namespace ServiceLayer.Services.WebApplication.Concrete
             if (errorMessage != string.Empty)
             {
                 //if exception, uploaded image deleted              
-                _imageHelper.Delete(imageUploadResume.FileName);
+                _imageHelper.Delete(imageUploadResume.FileName!);
                 _toasty.AddErrorToastMessage(errorMessage, new ToastrOptions { Title = "Opps!" });
                 return;
             }
@@ -88,13 +93,18 @@ namespace ServiceLayer.Services.WebApplication.Concrete
         //Update Method
         public async Task UpdateHomePageAsync(HomePageUpdateVM request)
         {
-            var oldHomePage = await _homePageRepository.Where(x => x.Id == request.Id).AsNoTracking().SingleOrDefaultAsync();
+            var oldHomePage = await _homePageRepository.Where(x => x.Id == request.Id).AsNoTracking().SingleAsync();
 
             if (request.PhotoResumeCv != null)
             {
                 //creates new image
                 var imageUploadLogoResume = await _imageHelper.ImageUpload(request.FullName, request.PhotoResumeCv, ImageType.Resume, null);
-                request.ResumeCvFileName = imageUploadLogoResume.FileName;
+                if (imageUploadLogoResume.Error != null)
+                {
+                    _toasty.AddErrorToastMessage(_messages.ImageError(), new ToastrOptions { Title = "Opps!" });
+                    return;
+                }
+                request.ResumeCvFileName = imageUploadLogoResume.FileName!;
                 request.ResumeCvFileType = request.PhotoResumeCv.ContentType;
             }
 

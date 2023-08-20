@@ -47,14 +47,19 @@ namespace ServiceLayer.Services.WebApplication.Concrete
         {
             //creates new image
             var imageUpload = await _imageHelper.ImageUpload(request.Title, request.Photo, ImageType.NewsImage, null);
-            request.FileName = imageUpload.FileName;
+            if (imageUpload.Error != null)
+            {
+                _toasty.AddErrorToastMessage(_messages.ImageError(), new ToastrOptions { Title = "Opps!" });
+                return;
+            }
+            request.FileName = imageUpload.FileName!;
             request.FileType = request.Photo.ContentType;
 
             await _newsFeedRepository.AddAsync(_mapper.Map<NewsFeed>(request));
             var errorMessage = await _unitOfWork.CommitAsync();
             if (errorMessage != string.Empty)
             {
-                _imageHelper.Delete(imageUpload.FileName);
+                _imageHelper.Delete(imageUpload.FileName!);
                 _toasty.AddErrorToastMessage(errorMessage, new ToastrOptions { Title = "Opps!" });
                 return;
             }
@@ -71,7 +76,12 @@ namespace ServiceLayer.Services.WebApplication.Concrete
             {
                 //creates new image
                 var imageUpload = await _imageHelper.ImageUpload(request.Title, request.Photo, ImageType.NewsImage, null);
-                request.FileName = imageUpload.FileName;
+                if (imageUpload.Error != null)
+                {
+                    _toasty.AddErrorToastMessage(_messages.ImageError(), new ToastrOptions { Title = "Opps!" });
+                    return;
+                }
+                request.FileName = imageUpload.FileName!;
                 request.FileType = request.Photo.ContentType;
             }
 

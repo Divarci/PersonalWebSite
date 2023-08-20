@@ -17,7 +17,6 @@
             </ol>
         </nav>
     </div><!-- End Page Title -->
-    <div class="card">
         <div class="card-body">
 
             <!-- Table with hoverable rows -->
@@ -41,7 +40,7 @@
                             <td>
                                 @for (int i = 0; i < item.AppRoles!.Count; i++)
                                 {
-                                    <a class="btn btn-warning btn-sm ">@item.AppRoles[i]</a>
+                                    <a class="btn btn-warning btn-sm m-1 ">@item.AppRoles[i]</a>
                                 }
                             </td>
                             @if (@item.ClaimValue!.Count == 0)
@@ -59,12 +58,12 @@
                                         {
                                             if (claim.Type == "TrialExpireDate")
                                             {
-                                                <a asp-route-userName="@item.UserName" asp-area="Admin" asp-controller="Admin" asp-action="TrialActivate" class="btn btn-secondary btn-sm mx-1">Expired!!</a>
+                                                <a asp-route-userName="@item.UserName" asp-area="Admin" asp-controller="Admin" asp-action="TrialActivate" class="btn btn-secondary btn-sm m-1">Expired!!</a>
 
                                             }
                                             if (claim.Type == "AdminObserveExpireDate")
                                             {
-                                                <a asp-route-userName="@item.UserName" asp-area="Admin" asp-controller="Admin" asp-action="ObserveActivate" class="btn btn-secondary btn-sm mx-1">Expired!!</a>
+                                                <a asp-route-userName="@item.UserName" asp-area="Admin" asp-controller="Admin" asp-action="ObserveActivate" class="btn btn-secondary btn-sm m-1">Expired!!</a>
 
                                             }
                                         }
@@ -82,8 +81,6 @@
                 </tbody>
             </table>
         </div>
-
-    </div>
 
 </body>
 

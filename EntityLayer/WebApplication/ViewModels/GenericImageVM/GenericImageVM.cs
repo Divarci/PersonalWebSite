@@ -2,6 +2,7 @@
 {
     public class GenericImageVM
     {
-        public string FileName { get; set; } = null!;
+        public string? FileName { get; set; }
+        public string? Error { get; set; }
     }
 }

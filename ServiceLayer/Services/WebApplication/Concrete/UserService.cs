@@ -10,12 +10,10 @@ namespace ServiceLayer.Services.WebApplication.Concrete
     public class UserService : IUserService
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly IMapper _mapper;
 
-        public UserService(UserManager<AppUser> userManager, IMapper mapper)
+        public UserService(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
-            _mapper = mapper;
         }
 
         public async Task<List<ClaimListVM>> ClaimList(IPrincipal user)

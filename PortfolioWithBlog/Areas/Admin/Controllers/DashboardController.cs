@@ -9,7 +9,7 @@ namespace PortfolioWithBlog.Areas.Admin.Controllers
     public class DashboardController : Controller
     {
 
-        //------------------
+        //Dashboard Page
         public IActionResult Index()
         {
             return View();
