@@ -1,0 +1,66 @@
+﻿@model List<ResumeAdminListVM>
+
+@{
+    ViewData["Title"] = "ActiveResumeList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="pagetitle">
+    <h1>Active Resume List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+            <li class="breadcrumb-item active">Resume List</li>
+        </ol>
+    </nav>
+</div><!-- End Breadcrumbs with a page title -->
+<!-- Table with stripped rows -->
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-earth-line"></i> </a></th>
+            <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-eye-line"></i></a></th>
+            <th style="width:25%" scope="col">TITLE</th>
+            <th style="width:55%" scope="col">DESCRIPTON</th>
+            <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-edit-2-line"></i> </a> </th>
+            <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-delete-bin-6-line"></i></a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var resume in Model)
+        {
+            <tr>
+                @if (resume.IsPublished)
+                {
+                    <td style="width:5%"><a class="btn btn-info"><i class="ri-wifi-fill"></i> </a></td>
+                }
+                else
+                {
+                    <td style="width:5%"><a data-id="@resume.Id" asp-area="Admin" asp-controller="Resume" asp-action="ResumePublish" class="btn btn-outline-secondary" asp-route-Id="@resume.Id"><i class="ri-wifi-off-line"></i></a></td>
+                }
+                @if (resume.IsEdited)
+                {
+                    <td style="width:5%"><a class="btn btn-info"><i class="ri-eye-line"></i> </a></td>
+                }
+                else
+                {
+                    <td style="width:5%"><a data-id="@resume.Id" asp-area="Admin" asp-controller="Resume" asp-action="ResumeEditable" class="btn btn-outline-secondary" asp-route-Id="@resume.Id"> <i class="ri-eye-off-fill"></i> </a></td>
+                }
+                <td style="width:25%">@resume.Title</td>
+                <td style="width:55%">@resume.Description</td>
+                <td style="width:5%"><a data-id="@resume.Id" asp-area="Admin" asp-controller="Resume" asp-action="ResumeUpdate" class="btn btn-outline-primary " asp-route-resumeId="@resume.Id"> <i class="ri-edit-2-line"></i> </a> </td>
+                <td style="width:5%"><a data-id="@resume.Id" asp-area="Admin" asp-controller="Resume" asp-action="MakeResumeInactive" class="btn btn-warning" asp-route-resumeId="@resume.Id"> <i class="ri-delete-bin-6-line"></i></a></td>
+               
+            </tr>
+        }
+
+    </tbody>
+</table>
+<!-- End Table with stripped rows -->
+
+<a asp-area="Admin" asp-controller="Resume" asp-action="ResumeAdd" class="btn btn-outline-success">NEW RESUME</a>
+<a asp-area="Admin" asp-controller="Resume" asp-action="InactiveResumeList" class="btn btn-outline-danger">INACTIVE LIST</a>
+
+
+

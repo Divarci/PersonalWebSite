@@ -1,0 +1,98 @@
+﻿@model List<AboutMeUserListVM>
+
+<!-- ======= About Us Section ======= -->
+<section class="breadcrumbs" id="AboutMe">
+    <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>About Me</h2>
+        </div>
+
+    </div>
+</section><!-- End About Us Section -->
+<!-- ======= About Section ======= -->
+@foreach (var item in Model)
+{
+
+    <section class="about" data-aos="fade-up">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="team col-lg-5 pt-4 pt-lg-0 d-flex align-items-stretch">
+
+
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="~/images/@item.FileName" alt="Software Developer" class="img-fluid">
+                            <div class="social">
+                                <a href="@item.SocialMedia.GitHub"><i class="bi bi-github"></i></a>
+                                <a href="@item.SocialMedia.Twitter"><i class="bi bi-twitter"></i></a>
+                                <a href="@item.SocialMedia.Youtube"><i class="bi bi-youtube"></i></a>
+                                <a href="@item.SocialMedia.LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="col-lg-7 pt-4 pt-lg-0">
+                    <h2 class="fw-bolder">@item.Title</h2>
+                    <br />
+                    <p>@item.Description</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- End About Section -->
+    <!-- ======= Facts Section ======= -->
+    <section class="facts section-bg" data-aos="fade-up">
+        <div class="container">
+
+            <div class="row counters">
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="@item.Fact.DaysOfStudy" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Days of Study</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="@item.Fact.Project" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Projects</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="@item.Fact.Certificate" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Certificates</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="@item.Fact.CodingLanguage" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Softwares</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Facts Section -->
+}
+
+<!-- ======= Skill Section ======= -->
+@await Component.InvokeAsync("SkillUser")
+
+<!-- ======= Services Section ======= -->
+<section class="services">
+    <div class="container">
+
+        <div class="row">
+            @await Component.InvokeAsync("EducationUser")
+            @await Component.InvokeAsync("ExperienceUser")
+            @await Component.InvokeAsync("CertificateUser")
+        </div>
+
+    </div>
+</section><!-- End Services Section -->

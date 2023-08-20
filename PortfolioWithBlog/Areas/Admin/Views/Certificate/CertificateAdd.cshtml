@@ -1,0 +1,66 @@
+﻿@model CertificateAddVM
+@{
+    ViewData["Title"] = "CertificateAdd";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<body>
+    <div class="pagetitle">
+        <h1>New Certificate</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Certificate" asp-action="CertificateList">Certificates</a></li>
+                <li class="breadcrumb-item active">New</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+                    <form asp-area="Admin" asp-controller="Certificate" asp-action="CertificateAdd" method="post" class="row g-12">
+                        <input type="hidden" asp-for="ResumeId" />
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="col-12">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" type="text" class="form-control">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="Date" class="form-label"></label>
+                            <input asp-for="Date" type="text" class="form-control">
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="Priorty" class="form-label"></label>
+                            <input asp-for="Priorty" type="number" class="form-control">
+                            <span asp-validation-for="Priorty" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" type="text" class="form-control">
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="text-center">
+                            <br />
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+
+

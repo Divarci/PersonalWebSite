@@ -1,0 +1,36 @@
+﻿@model List<MessageAdminListForDashboardVM>
+
+
+
+<body>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Lastest Messages</h5>
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:10%" scope="col">DATE</th>
+                        <th style="width:30%" scope="col">SENDER</th>
+                        <th style="width:60%" scope="col">SUBJECT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width:10%">@item.CreatedDate</td>
+                            <td style="width:30%">@item.Sender</td>
+                            <td style="width:60%">@item.Subject</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+        </div>
+
+    </div>
+
+</body>
+

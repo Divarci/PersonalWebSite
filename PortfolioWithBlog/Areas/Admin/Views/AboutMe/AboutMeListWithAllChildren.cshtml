@@ -1,0 +1,185 @@
+﻿@model List<AboutMeAdminListVM>
+@{
+    ViewData["Title"] = "AboutMeListWithAllChildren";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="section profile">
+    <div class="pagetitle">
+        <h1>About Me</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Profile</li>
+            </ol>
+        </nav>
+    </div><!-- End Breadcrumbs with a page title -->
+
+    <div class="row">
+        <div class="card-body">
+            <!-- Resume Table -->
+            <table class="table table-default">
+                <thead>
+                    <tr>
+                        <th style="width:5%" scope="col"> <a class="btn btn-secondary"><i class="ri-earth-line"></i> </a></th>
+                        <th style="width:55%" scope="col">RESUME</th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-edit-2-line"></i> </a> </th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-delete-bin-6-line"></i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                            @if (item.IsPublished)
+                            {
+                                <td style="width:5%">
+                                    <a class="btn btn-info"><i class="ri-wifi-fill"></i> </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="width:5%">
+                                    <a class="btn btn-outline-secondary"><i class="ri-wifi-off-line"></i> </a>
+                                </td>
+                            }
+
+
+                            <td style="width:55%">@item.Title</td>
+
+                            <td style="width:5%"><a data-id="@item.Id" asp-area="Admin" asp-controller="AboutMe" asp-action="AboutMeUpdateWithAllChildren" asp-route-Id="@item.Id" class=" btn btn-outline-primary"> <i class="ri-edit-2-line"></i> </a> </td>
+                            <td style="width:5%">
+                                <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteconfirmation-@item.Id"><i class="ri-delete-bin-6-line"></i></a>
+
+                                <div class="modal fade" id="deleteconfirmation-@item.Id" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">WARNING!!</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                You are about to delete this data. Are you sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a data-id="@item.Id" asp-area="Admin" asp-controller="AboutMe" asp-action="DeleteAboutMeWithAllChildren" class="btn btn-outline-danger" asp-route-id="@item.Id">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        }
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+            @if (Model.Count == 0)
+            {
+                <a asp-area="Admin" asp-controller="AboutMe" asp-action="AboutMeAddWithAllChildren" class="btn btn-success">NEW PROFILE</a>
+            }
+
+        </div>
+
+
+        @if (Model.Count != 0)
+        {
+            <div class="col-xl-4">
+                <!-- About Me Section -->
+                <div class="card">
+                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        @foreach (var item in Model)
+                        {
+
+                            <img src="~/images/@item.FileName" alt="Software Developer" class="rounded-circle">
+                            <h3>@item.Title</h3>
+                            <p class="small fst-italic">@item.Description</p>
+
+                            <div class="social-links mt-2">
+                                <a href="@item.SocialMedia.Twitter" class="twitter"><i class="bi bi-twitter"></i></a>
+                                <a href="@item.SocialMedia.GitHub" class="github"><i class="bi bi-github"></i></a>
+                                <a href="@item.SocialMedia.Youtube" class="youtube"><i class="bi bi-youtube"></i></a>
+                                <a href="@item.SocialMedia.LinkedIn" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-xl-8">
+                <!-- Information -->
+                <div class="card">
+                    <div class="card-body pt-3">
+
+                        <div class="tab-content pt-2">
+
+                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                <h5 class="card-title">Profile Details</h5>
+                                @foreach (var item in Model)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Certificates</div>
+                                        <div class="col-lg-9 col-md-8">@item.Fact.Certificate</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Coding Languages</div>
+                                        <div class="col-lg-9 col-md-8">@item.Fact.CodingLanguage</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Projects</div>
+                                        <div class="col-lg-9 col-md-8">@item.Fact.Project</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Days Of Study</div>
+                                        <div class="col-lg-9 col-md-8">@item.Fact.DaysOfStudy</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Address</div>
+                                        <div class="col-lg-9 col-md-8">@item.Contact.Address</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Email</div>
+                                        <div class="col-lg-9 col-md-8">@item.Contact.Email</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Phone</div>
+                                        <div class="col-lg-9 col-md-8">@item.Contact.Phone</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Location Url</div>
+                                        <div class="col-lg-9 col-md-8">@item.Contact.LocationUrl</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label ">Created Date</div>
+                                        <div class="col-lg-9 col-md-8">@item.CreatedDate</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label ">Updated Date</div>
+                                        <div class="col-lg-9 col-md-8">@item.UpdatedDate</div>
+                                    </div>
+                                }
+                            </div>
+
+                        </div><!-- End Bordered Tabs -->
+
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</section>

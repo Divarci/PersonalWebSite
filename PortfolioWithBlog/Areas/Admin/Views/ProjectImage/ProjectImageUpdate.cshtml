@@ -1,0 +1,68 @@
+﻿@model ProjectImageUpdateVM
+@{
+    ViewData["Title"] = "ProjectImageUpdate";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<section class="section profile">
+    <div class="pagetitle" style="display: flex; align-items: center;">
+
+        <h1>Update Image</h1>
+    </div><!-- End Page Title -->
+
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Project" asp-action="ProjectList">Projects</a></li>
+            <li class="breadcrumb-item"><a data-id="@Model.ProjectId" asp-route-id="@Model.ProjectId" asp-area="Admin" asp-controller="Project" asp-action="ProjectDetail">@Model.Title</a></li>
+            <li class="breadcrumb-item"><a data-id="@Model.ProjectId" asp-route-id="@Model.ProjectId" asp-area="Admin" asp-controller="ProjectImage" asp-action="ProjectImageList">Images</a></li>
+            <li class="breadcrumb-item active">Update</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+
+        <div class="col-xl-12">
+            <!-- Information -->
+            <div class="card">
+                <div class="card-body pt-3">
+                    <div class="tab-content pt-2">
+                        <!-- Profile Edit Form -->
+                        <form asp-area="Admin" asp-controller="ProjectImage" asp-action="ProjectImageUpdate" method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="ProjectId" />
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="RowVersion" />
+                            <input type="hidden" asp-for="FileName" />
+                            <input type="hidden" asp-for="FileName" />
+                            <div asp-validation-summary="ModelOnly"></div>
+
+
+                            <div class="row mb-3">
+                                <label asp-for="Photo" class="col-md-4 col-lg-3 col-form-label"></label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input asp-for="Photo" accept="image/*" type="file" class="form-control">                                    <span asp-validation-for="Photo" class="text-danger"></span>
+                                    <span asp-validation-for="Photo" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form><!-- End Profile Edit Form -->
+
+                    </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+

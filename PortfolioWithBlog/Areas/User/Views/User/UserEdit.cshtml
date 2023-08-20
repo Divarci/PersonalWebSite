@@ -1,0 +1,80 @@
+﻿@model UserEditVM
+@{
+    ViewData["Title"] = "UserEdit";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="pt-4 pb-2">
+            <h5 class="card-title text-center pb-0 fs-4">Edit Account</h5>
+            <p class="text-center small">Enter your personal details to update your account</p>
+        </div>
+        @if (!string.IsNullOrEmpty(ViewBag.Result))
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div asp-validation-summary="All"></div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        <form asp-area="User" asp-controller="User" asp-action="UserEdit" method="post" class="row g-3 " enctype="multipart/form-data">
+            <input asp-for="ConcurrencyStamp" type="hidden" />
+
+            <div class="col-md-6">
+                <label asp-for="UserName" class="form-label"></label>
+                <input asp-for="UserName" type="text" class="form-control">
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" type="email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" type="number" class="form-control">
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Photo" class="form-label"></label>
+                <input asp-for="Photo" type="file" class="form-control">
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-12">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" type="password" class="form-control">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NewPassword" class="form-label"></label>
+                <input asp-for="NewPassword" type="password" class="form-control">
+                <span asp-validation-for="NewPassword" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="NewPasswordConfirm" class="form-label"></label>
+                <input asp-for="NewPasswordConfirm" type="password" class="form-control">
+                <span asp-validation-for="NewPasswordConfirm" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <button class="btn btn-outline-primary w-100" type="submit">Save Changes</button>
+            </div>
+           
+        </form>
+
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,92 @@
+﻿@model AboutMeUpdateVM
+
+@{
+    ViewData["Title"] = "AboutMeUpdateWithAllChildren";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<section class="section profile">
+    <div class="pagetitle">
+        <h1>Profile Update</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="AboutMe" asp-action="AboutMeListWithAllChildren">Profile Overiew</a></li>
+                <li class="breadcrumb-item active">Update</li>
+            </ol>
+        </nav>
+    </div><!-- End Breadcrumbs with a page title -->
+
+    <div class="row">
+
+        <div class="col-xl-12">
+            <!-- Information -->
+            <div class="card">
+                <div class="card-body pt-3">
+                    <div class="tab-content pt-2">
+                        <!-- Profile Edit Form -->
+                        <form asp-area="Admin" asp-controller="AboutMe" asp-action="AboutMeUpdateWithAllChildren" method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="ResumeId" />
+                            <input type="hidden" asp-for="RowVersion" />
+                            <input type="hidden" asp-for="FactId" />
+                            <input type="hidden" asp-for="ContactId" />
+                            <input type="hidden" asp-for="SocialMediaId" />
+                            <input type="hidden" asp-for="Contact.Id" />
+                            <input type="hidden" asp-for="Contact.RowVersion" />
+                            <input type="hidden" asp-for="Fact.Id" />
+                            <input type="hidden" asp-for="Fact.RowVersion" />
+                            <input type="hidden" asp-for="SocialMedia.Id" />
+                            <input type="hidden" asp-for="SocialMedia.RowVersion" />
+                            <input type="hidden" asp-for="FileName" />
+                            <input type="hidden" asp-for="FileType" />
+                            <input type="hidden" asp-for="IsPublished" />
+                            <input type="hidden" asp-for="IsEdited" />
+                            <div asp-validation-summary="ModelOnly"></div>
+
+                            <div class="row mb-3">
+                                <label asp-for="Title" class="col-md-4 col-lg-3 col-form-label"></label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input asp-for="Title" type="text" class="form-control">
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label asp-for="Description" class="col-md-4 col-lg-3 col-form-label"></label>
+                                <div class="col-md-8 col-lg-9">
+                                    <textarea asp-for="Description" class="form-control" style="height: 200px"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <partial name="AboutMeUpdatePartials/_SocialMediaPartialView" />
+                            <partial name="AboutMeUpdatePartials/_FactPartialView" />
+                            <partial name="AboutMeUpdatePartials/_ContactPartialView" />
+                           
+                            <div class="row mb-3">
+                                <label asp-for="Photo" class="col-md-4 col-lg-3 col-form-label"></label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input asp-for="Photo" accept="image/*" type="file" class="form-control">
+                                    <span asp-validation-for="Photo" class="text-danger"></span>
+
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </div>
+                        </form><!-- End Profile Edit Form -->
+
+                    </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,33 @@
+﻿@model AboutMeUpdateVM
+
+<div class="row mb-3">
+    <label asp-for="Fact.Certificate" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Fact.Certificate" type="number" class="form-control">
+        <span asp-validation-for="Fact.Certificate" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label asp-for="Fact.CodingLanguage" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Fact.CodingLanguage" type="number" class="form-control">
+        <span asp-validation-for="Fact.CodingLanguage" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label asp-for="Fact.Project" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Fact.Project" type="number" class="form-control">
+        <span asp-validation-for="Fact.Project" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label asp-for="Fact.DaysOfStudy" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Fact.DaysOfStudy" type="number" class="form-control">
+        <span asp-validation-for="Fact.DaysOfStudy" class="text-danger"></span>
+    </div>
+</div>

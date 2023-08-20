@@ -1,0 +1,46 @@
+﻿@model ProjectAdminListVM
+@{
+    ViewData["Title"] = "ProjectDetail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<body>
+    <div class="pagetitle">
+        <h1>Project Detail</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Project" asp-action="ProjectList">Projects</a></li>
+                <li class="breadcrumb-item active">@Model.Title</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <!-- Card with an image on left -->
+
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-12">
+                <div class="card-body">
+
+                    <h5 class="card-title">@Model.Title - @Model.ProjectDate</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text"><strong>Created Date: </strong>@Model.CreatedDate</p>
+                    <p class="card-text"><strong>Updated Date: </strong>@Model.UpdatedDate</p>
+                    <p class="card-text"><strong>Category: </strong>@Model.Category.Title</p>
+                    <br />
+                    <a data-id="@Model.Id" asp-area="Admin" asp-controller="Project" asp-action="ProjectUpdate" class="btn btn-primary" asp-route-Id="@Model.Id"> Edit </a>
+                    <a data-id="@Model.Id" asp-area="Admin" asp-controller="ProjectImage" asp-action="ProjectImageList" class="btn btn-info" asp-route-Id="@Model.Id"> Picture Manager </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+
+
+

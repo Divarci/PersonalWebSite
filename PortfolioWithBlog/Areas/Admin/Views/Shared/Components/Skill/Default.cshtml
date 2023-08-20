@@ -1,0 +1,53 @@
+﻿@model List<SkillUserListVM>
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Skills</h5>
+
+
+
+
+        @foreach (var item in Model)
+        {
+
+
+            if (item.Value < 45)
+            {
+
+                <div class="progress mt-1" style="height:35px;">
+                    <div class="progress-bar bg-danger" style="width:@item.Value%" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100">
+                        <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                    </div>
+                </div>
+            }
+
+            if (item.Value > 44 && item.Value < 60)
+            {
+                <div class="progress mt-1" style="height:35px;">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width:@item.Value%" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100">
+                        <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                    </div>
+                </div>
+            }
+
+            if (item.Value > 59 && item.Value < 85)
+            {
+                <div class="progress mt-1"style="height:35px;">
+                    <div class="progress-bar  bg-info" role="progressbar" style="width:@item.Value%" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100">
+                        <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                    </div>
+                </div>
+            }
+            if (item.Value > 84 && item.Value < 101)
+            {
+                <div class="progress mt-1" style="height:35px;">
+                    <div class="progress-bar bg-success" role="progressbar" style="width:@item.Value%" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100">
+                        <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+</div>

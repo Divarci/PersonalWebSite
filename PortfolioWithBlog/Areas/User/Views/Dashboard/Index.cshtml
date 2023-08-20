@@ -1,0 +1,54 @@
+﻿@model NewsFeedUserListVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/User/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
+    <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+            <div class="row">
+                @await Component.InvokeAsync("Claims")
+            </div>
+            <!-- Card with an image on left -->
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="~/images/@Model.FileName" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Title</h5>
+                            <p class="card-text">@Model.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- End Card with an image on left -->
+
+
+        </div><!-- End Left side columns -->
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+            <!-- News & Updates Traffic -->
+            @await Component.InvokeAsync("NewsFeed")
+
+        </div><!-- End Right side columns -->
+
+    </div>
+</section>
+

@@ -1,0 +1,59 @@
+﻿@model NewsFeedAddVM
+@{
+    ViewData["Title"] = "NewsFeedAdd";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<body>
+    <div class="pagetitle">
+        <h1>Add News</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="NewsFeed" asp-action="GetNewsList">News and Feeds</a></li>
+                <li class="breadcrumb-item active">New</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+                    <form asp-area="Admin" asp-controller="NewsFeed" asp-action="NewsFeedAdd" method="post" class="row g-12" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="col-6">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" type="text" class="form-control">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="Photo" class="form-label"></label>
+                            <input asp-for="Photo" type="file" class="form-control">
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" type="text" class="form-control" style="height: 300px"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>                      
+                        <div class="text-center">
+                            <br />
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+
+

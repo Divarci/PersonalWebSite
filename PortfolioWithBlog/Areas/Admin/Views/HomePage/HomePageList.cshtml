@@ -1,0 +1,118 @@
+﻿@model List<HomePageAdminListVM>
+@{
+    ViewData["Title"] = "HomePageList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="section profile">
+    <div class="pagetitle">
+        <h1>Home Page Layout</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Layout</li>
+            </ol>
+        </nav>
+    </div><!-- End Breadcrumbs with a page title -->
+
+    <div class="row">
+        <div class="card-body">
+            <!-- Resume Table -->
+            <table class="table table-default">
+                <thead>
+                    <tr>
+                        <th style="width:5%" scope="col"> <a class="btn btn-secondary"><i class="ri-earth-line"></i> </a></th>
+                        <th style="width:55%" scope="col">TITLE</th>
+                        <th style="width:15%" scope="col">CR.DT.</th>
+                        <th style="width:15%" scope="col">UP.DT.</th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-edit-2-line"></i> </a> </th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-delete-bin-6-line"></i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                            @if (item.IsPublished)
+                            {
+                                <td style="width:5%">
+                                    <a class="btn btn-info"><i class="ri-wifi-fill"></i> </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="width:5%">
+                                    <a class="btn btn-outline-secondary"><i class="ri-wifi-off-line"></i> </a>
+                                </td>
+                            }
+
+
+                            <td style="width:55%">@item.FullName</td>
+                            <td style="width:15%">@item.CreatedDate</td>
+                            <td style="width:15%">@item.UpdatedDate</td>
+                            <td style="width:5%"><a data-id="@item.Id" asp-area="Admin" asp-controller="HomePage" asp-action="HomePageUpdate" asp-route-Id="@item.Id" class=" btn btn-outline-primary"> <i class="ri-edit-2-line"></i> </a> </td>
+                            <td style="width:5%">
+                                <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteconfirmation-@item.Id"><i class="ri-delete-bin-6-line"></i></a>
+
+                                <div class="modal fade" id="deleteconfirmation-@item.Id" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">WARNING!!</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                You are about to delete this data. Are you sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a data-id="@item.Id" asp-area="Admin" asp-controller="HomePage" asp-action="HomePageDelete" class="btn btn-outline-danger" asp-route-id="@item.Id">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        }
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+            @if (Model.Count == 0)
+            {
+                <a asp-area="Admin" asp-controller="HomePage" asp-action="HomePageAdd" class="btn btn-success">NEW LAYOUT</a>
+            }
+
+        </div>
+    </div>
+
+</section>
+
+
+@if (Model.Count != 0)
+{
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="~/images/@Model[0].ResumeCvFileName"  class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@Model[0].FullName</h5>
+                    <p class="card-text"><strong>Description: </strong>@Model[0].Description</p>
+                    <p class="card-text"><strong>Video Url: </strong>@Model[0].VideoUrl</p>
+                    <p class="card-text"><strong>Resume </strong>@(Model[0].ResumeCvFileName == null ? "None" : "Uploaded")</p>
+
+                    <br />
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+}

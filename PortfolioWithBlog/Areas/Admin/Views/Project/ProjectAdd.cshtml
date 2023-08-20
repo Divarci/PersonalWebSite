@@ -1,0 +1,67 @@
+﻿@model ProjectAddVM
+@{
+    ViewData["Title"] = "ProjectAdd";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<body>
+    <div class="pagetitle">
+        <h1>New Project</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Project" asp-action="ProjectList">Projects</a></li>
+                <li class="breadcrumb-item active">New</li>
+            </ol>
+        </nav>
+    </div>
+    <section class="section">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+                    <form asp-area="Admin" asp-controller="Project" asp-action="ProjectAdd" method="post" class="row g-12">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="col-12">
+                            <label asp-for="Title" class="form-label"></label>
+                            <input asp-for="Title" type="text" class="form-control">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="ProjectDate" class="form-label"></label>
+                            <input asp-for="ProjectDate" type="text" class="form-control">
+                            <span asp-validation-for="ProjectDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-6">
+                            <label asp-for="ProjectCategoryId" class="form-label"></label>
+                            <select asp-for="ProjectCategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Title"))" class="select2 form-select"></select>
+                            <span asp-validation-for="ProjectCategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" type="text" class="form-control" style="height: 200px"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center">
+                            <br />
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</body>
+
+
+
+

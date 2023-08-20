@@ -1,0 +1,69 @@
+﻿@model List<ProjectImageAdminListVM>
+@{
+    ViewData["Title"] = "ProjectImageList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="pagetitle">
+    <div class="pagetitle" style="display: flex; align-items: center;">
+
+        <h1>Image List</h1>
+    </div><!-- End Page Title -->
+
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Project" asp-action="ProjectList">Projects</a></li>
+            <li class="breadcrumb-item"><a data-id="@Html.ViewBag.ProjectId" asp-route-id="@Html.ViewBag.ProjectId" asp-area="Admin" asp-controller="Project" asp-action="ProjectDetail">Project Page</a></li>
+            <li class="breadcrumb-item active">Images</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+<div class="mb-2">
+    <a data-id="@Html.ViewBag.ProjectId" asp-route-id="@Html.ViewBag.ProjectId" asp-area="Admin" asp-controller="ProjectImage" asp-action="ProjectImageAdd" class="btn btn-outline-success col-12">NEW IMAGE</a>
+</div>
+
+<div class="row row-items-md-3 ">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 d-flex align-self-stretch">
+            <div class="card ">
+                <div class="row g-0">
+                    <div class="card-header">
+                        <a data-id="@item.Id" asp-route-id="@item.Id" asp-area="Admin" asp-controller="ProjectImage" asp-action="ProjectImageUpdate" class="btn btn-outline-warning">Edit</a>
+                        <a data-bs-toggle="modal" data-bs-target="#deleteconfirmation-@item.Id" class="btn btn-outline-danger">Delete</a>
+
+                        <div class="modal fade" id="deleteconfirmation-@item.Id" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">WARNING!!</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        You are about to delete this data. Are you sure?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <a data-id="@item.Id" asp-route-id="@item.Id" asp-area="Admin" asp-controller="ProjectImage" asp-action="ProjectImageDelete" class="btn btn-outline-danger">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <img src="~/images/@item.FileName" class="img-fluid rounded-start" alt="Software and Website">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Project.Title</h5>
+                        <p class="card-text"><strong>Created Date:</strong> @item.CreatedDate</p>
+                        <p class="card-text"><strong>Updated Date:</strong> @item.UpdatedDate</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

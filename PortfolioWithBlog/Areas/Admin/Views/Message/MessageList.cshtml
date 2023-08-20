@@ -1,0 +1,114 @@
+﻿@model List<MessageAdminListVM>
+@{
+    ViewData["Title"] = "MessageList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<body>
+    <div class="pagetitle">
+        <div class="pagetitle" style="display: flex; align-items: center;">
+
+            <h1>Messages</h1>
+        </div><!-- End Page Title -->
+
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Messages</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+        <div class="card-body">
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:10%" scope="col">DATE</th>
+                        <th style="width:20%" scope="col">SENDER</th>
+                        <th style="width:20%" scope="col">EMAIL</th>
+                        <th style="width:40%" scope="col">SUBJECT</th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="bx bxs-book-reader"></i> </a> </th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-delete-bin-6-line"></i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width:10%">@item.CreatedDate</td>
+                            <td style="width:20%">@item.Sender</td>
+                            <td style="width:20%">@item.Email</td>
+                            <td style="width:40%">@item.Subject</td>
+
+                            <td style="width:5%">
+                                <a class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#readmessage-@item.Id"><i class="bx bxs-book-reader"></i></a>
+                                <div class="modal fade" id="readmessage-@item.Id" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">@item.Sender</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                               @item.Description
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+
+
+                            <td style="width:5%">
+                                <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteconfirmation-@item.Id"><i class="ri-delete-bin-6-line"></i></a>
+                                <div class="modal fade" id="deleteconfirmation-@item.Id" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">WARNING!!</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                You are about to delete this data. Are you sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a data-id="@item.Id" asp-area="Admin" asp-controller="Message" asp-action="MessageDelete" class="btn btn-outline-danger" asp-route-Id="@item.Id">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <!-- End Table with hoverable rows -->
+           
+        </div>
+    @foreach (var item in Model)
+    {
+        @if (item.Resume.IsPublished)
+        {
+            <a class="btn btn-info"> <i class="ri-wifi-fill"></i> </a>
+            break;
+        }
+        else
+        {
+            <a class="btn btn-secondary"> <i class="ri-wifi-off-line"></i> </a>
+            break;
+        }
+    }
+
+</body>
+
+
+

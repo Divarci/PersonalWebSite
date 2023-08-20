@@ -1,0 +1,17 @@
+﻿@model NotFoundVM
+@{
+    ViewData["Title"] = "ValueNotFound";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="container">
+
+        <section class="section error-404 d-flex flex-column align-items-center justify-content-center">
+            <h1>404</h1>
+            <h2>@Model.Errors.FirstOrDefault()</h2>
+            <img src="~/NiceAdmin/assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
+        </section>
+
+    </div>
+

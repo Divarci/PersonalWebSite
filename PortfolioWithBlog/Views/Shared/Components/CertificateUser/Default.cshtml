@@ -1,0 +1,50 @@
+﻿@model List<CertificateUserListVM>
+
+<div class="col-md-6 col-lg-4 d-flex align-items-stretch" data-aos="fade-up">
+    <div class="icon-box icon-box-green">
+        <div class="icon"><i class="bx bx-tachometer"></i></div>
+        <h4 class="title"><a data-bs-toggle="modal" data-bs-target="#certificatelist">Certificate</a></h4>
+        <p>Dive into my accomplishments! Click the button to unveil a trove of certificates.</p>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="certificatelist" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title ">CERTIFICATE</h5>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-default">
+                    <thead>
+                        <tr>
+                            <th style="width:33%" scope="col">DATE</th>
+                            <th style="width:34%" scope="col">TITLE</th>
+                            <th style="width:33%" scope="col">LOCATION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td style="width:33%">@item.Date</td>
+                                <td style="width:34%">@item.Title</td>
+                                <td style="width:33%">@item.Location </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

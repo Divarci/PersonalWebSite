@@ -1,0 +1,33 @@
+﻿@model AboutMeUpdateVM
+
+<div class="row mb-3">
+    <label asp-for="Contact.Address" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Contact.Address" type="text" class="form-control">
+        <span asp-validation-for="Contact.Address" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label asp-for="Contact.Email" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Contact.Email" type="email" class="form-control">
+        <span asp-validation-for="Contact.Email" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label asp-for="Contact.Phone" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Contact.Phone" type="number" class="form-control">
+        <span asp-validation-for="Contact.Phone" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <label asp-for="Contact.LocationUrl" class="col-md-4 col-lg-3 col-form-label"></label>
+    <div class="col-md-8 col-lg-9">
+        <input asp-for="Contact.LocationUrl" type="text" class="form-control">
+        <span asp-validation-for="Contact.LocationUrl" class="text-danger"></span>
+    </div>
+</div>

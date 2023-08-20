@@ -1,0 +1,24 @@
+﻿@model List<ProjectListDashboardVM>
+
+
+<!-- News & Updates Traffic -->
+<div class="card">
+
+    <div class="card-body">
+        <h5 class="card-title">Latest Projects</h5>
+
+        <div class="news">
+            @foreach (var item in Model)
+            {
+                <div class="post-item clearfix">
+                    <img src="~/images/@item.Images.FirstOrDefault().FileName" alt="">
+                    <h4>@item.Title</h4>
+                    <p>@item.ProjectDate</p>
+
+                </div>
+            }
+
+        </div><!-- End sidebar recent posts-->
+
+    </div>
+</div><!-- End New

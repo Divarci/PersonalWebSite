@@ -1,0 +1,56 @@
+﻿@model List<SkillUserListVM>
+
+
+<!-- ======= Our Skills Section ======= -->
+<section class="skills" data-aos="fade-up">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>My Skills</h2>
+            <div class="skills-content">
+                @foreach (var item in Model)
+                {
+                    
+
+                    if (item.Value < 45)
+                    {
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" >
+                                <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                            </div>
+                        </div>
+                    }
+
+                    if (item.Value > 44 && item.Value < 60)
+                    {
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" >
+                                <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                            </div>
+                        </div>
+                    }
+
+                    if (item.Value > 59 && item.Value < 85)
+                    {
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" >
+                                <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                            </div>
+                        </div>
+                    }
+                    if (item.Value > 84 && item.Value < 101)
+                    {
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" >
+                                <span class="skill">@item.Title<i class="val">@item.Value%</i></span>
+                            </div>
+                        </div>
+                    }
+                                       
+                }
+            </div>
+
+        </div>
+    </div>
+</section>
+

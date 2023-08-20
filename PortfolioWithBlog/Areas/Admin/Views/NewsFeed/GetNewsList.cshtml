@@ -1,0 +1,76 @@
+﻿@model List<NewsFeedAdminListVM>
+@{
+    ViewData["Title"] = "GetNewsList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<body>
+    <div class="pagetitle">
+        <div class="pagetitle" style="display: flex; align-items: center;">
+            <h1>News and Feeds</h1>
+        </div><!-- End Page Title -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item active">News</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+        <div class="card-body">
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">TITLE</th>
+                        <th style="width:15%" scope="col">CR.DT.</th>
+                        <th style="width:15%" scope="col">UP.DT.</th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-edit-2-line"></i> </a> </th>
+                        <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-delete-bin-6-line"></i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td style="width:15%">@item.CreatedDate</td>
+                            <td style="width:15%">@item.UpdatedDate</td>
+                            <td><a data-id="@item.Id" asp-area="Admin" asp-controller="NewsFeed" asp-action="NewsFeedUpdate" class="btn btn-outline-primary" asp-route-Id="@item.Id"> <i class="ri-edit-2-line"></i></a> </td>
+
+                            <td style="width:5%">
+                                <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteconfirmation-@item.Id"><i class="ri-delete-bin-6-line"></i></a>
+
+                                <div class="modal fade" id="deleteconfirmation-@item.Id" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">WARNING!!</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                You are about to delete this data. Are you sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <a data-id="@item.Id" asp-area="Admin" asp-controller="NewsFeed" asp-action="NewsFeedDelete" class="btn btn-outline-danger" asp-route-Id="@item.Id">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    <a asp-area="Admin" asp-controller="NewsFeed" asp-action="NewsFeedAdd" class="btn btn-success">ADD NEWS FEED</a>
+
+
+</body>
+
+

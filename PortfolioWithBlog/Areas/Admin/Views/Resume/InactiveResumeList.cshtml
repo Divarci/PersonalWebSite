@@ -1,0 +1,73 @@
+﻿@model List<ResumeAdminListVM>
+
+@{
+    ViewData["Title"] = "InactiveResumeList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="pagetitle">
+    <h1>Inactive Resume List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+            <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Resume" asp-action="ActiveResumeList">Active Resume List</a></li>
+            <li class="breadcrumb-item active">Inactive Resume List</li>
+        </ol>
+    </nav>
+</div><!-- End Breadcrumbs with a page title -->
+
+
+<!-- Table with hoverable rows -->
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th style="width:25%" scope="col">TITLE</th>
+            <th style="width:65%" scope="col">DESCRIPTION</th>
+            <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="bx bx-recycle"></i> </a> </th>
+            <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-delete-bin-6-line"></i></a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td style="width:25%">@item.Title</td>
+                <td style="width:65%">@item.Description</td>
+                <td style="width:5%"><a data-id="@item.Id" asp-area="Admin" asp-controller="Resume" asp-action="MakeResumeActive" class="btn btn-outline-success " asp-route-resumeId="@item.Id"> <i class="bx bx-recycle"></i> </a> </td>
+                <td style="width:5%">
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteconfirmation-@item.Id"><i class="ri-delete-bin-6-line"></i></a>
+
+                    <div class="modal fade" id="deleteconfirmation-@item.Id" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">WARNING!!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    You are about to delete this data. Are you sure?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <a data-id="@item.Id" asp-area="Admin" asp-controller="Resume" asp-action="ResumeDelete" class="btn btn-danger" asp-route-resumeId="@item.Id">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+
+
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+<!-- End Table with hoverable rows -->
+
+
+

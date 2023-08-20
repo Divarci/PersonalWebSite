@@ -1,0 +1,47 @@
+﻿@model List<AboutMeForContactVM>
+
+
+@foreach (var item in Model)
+{
+    <!-- ======= Map Section ======= -->
+    <section class="map my-3">
+        <div class="container-fluid p-0">
+            <iframe src="@item.Contact.LocationUrl" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+    </section>
+
+    <!-- End Map Section -->
+}
+
+@foreach (var item in Model)
+{
+    <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="info-box">
+                        <i class="bx bx-map"></i>
+                        <h3>Address</h3>
+                        <p>@item.Contact.Address</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <i class="bx bx-envelope"></i>
+                        <h3>Email Me</h3>
+                        <p>@item.Contact.Email</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-box">
+                        <i class="bx bx-phone-call"></i>
+                        <h3>Call Me</h3>
+                        <p>@item.Contact.Phone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- End Contact Section -->
+}

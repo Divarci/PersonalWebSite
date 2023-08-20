@@ -1,0 +1,24 @@
+﻿@model List<NewsFeedUserListVM>
+
+
+<!-- News & Updates Traffic -->
+<div class="card">
+
+    <div class="card-body">
+        <h5 class="card-title">News &amp; Updates</h5>
+
+        <div class="news">
+            @foreach (var item in Model)
+            {
+                <div class="post-item clearfix">
+                    <img src="images/@item.FileName" alt="Software and Website">
+                    <h4>@item.Title</h4>
+                    <p>@item.CreatedDate</p>
+
+                </div>
+            }
+
+        </div><!-- End sidebar recent posts-->
+
+    </div>
+</div><!-- End News & Updates -->

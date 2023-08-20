@@ -1,0 +1,90 @@
+﻿@model HomePageUpdateVM
+@{
+    ViewData["Title"] = "HomePageUpdate";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+<section class="section profile">
+    <div class="pagetitle">
+        <h1>Update Layout</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="HomePage" asp-action="HomePageList">Layout Overiew</a></li>
+                <li class="breadcrumb-item active">Update</li>
+            </ol>
+        </nav>
+    </div><!-- End Breadcrumbs with a page title -->
+
+    <div class="row">
+
+        <div class="col-xl-12">
+            <!-- Information -->
+            <div class="card">
+                <div class="card-body pt-3">
+                    <div class="tab-content pt-2">
+                        <!-- Profile Edit Form -->
+                        <form asp-area="Admin" asp-controller="HomePage" asp-action="HomePageUpdate" method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="ResumeId" />
+                            <input type="hidden" asp-for="RowVersion" />
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="IsPublished" />
+                            <input type="hidden" asp-for="IsEdited" />
+                            <input type="hidden" asp-for="ResumeCvFileName" />
+                            <input type="hidden" asp-for="ResumeCvFileType" />
+                            <div asp-validation-summary="ModelOnly"></div>
+
+                            <div class="row mb-3">
+                                <label asp-for="Description" class="col-md-4 col-lg-3 col-form-label"></label>
+                                <div class="col-md-8 col-lg-9">
+                                    <textarea asp-for="Description" class="form-control" style="height: 200px"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label asp-for="FullName" class="col-md-4 col-lg-3 col-form-label"></label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input asp-for="FullName" type="text" class="form-control">
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="VideoUrl" class="col-md-4 col-lg-3 col-form-label">Video Url</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input asp-for="VideoUrl" type="text" class="form-control">
+                                    <span asp-validation-for="VideoUrl" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="PhotoResumeCv" class="col-md-4 col-lg-3 col-form-label">Select Resume Picture</label>
+                                <div class="col-md-8 col-lg-9">
+                                    <input asp-for="PhotoResumeCv" accept="image/*" type="file" class="form-control">
+                                    <span asp-validation-for="PhotoResumeCv" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form><!-- End Profile Edit Form -->
+
+                    </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+

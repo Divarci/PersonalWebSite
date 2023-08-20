@@ -1,0 +1,91 @@
+﻿@model List<UserVM>
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<body>
+    <div class="pagetitle">
+        <div class="pagetitle" style="display: flex; align-items: center;">
+            <h1>User List</h1>
+        </div><!-- End Page Title -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Users</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div class="card">
+        <div class="card-body">
+
+            <!-- Table with hoverable rows -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">USERNAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">PHONE NUMBER</th>
+                        <th scope="col">ROLES</th>
+                        <th scope="col">TRIAL - OBSERVE STATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>@item.Email</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>
+                                @for (int i = 0; i < item.AppRoles!.Count; i++)
+                                {
+                                    <a class="btn btn-warning btn-sm ">@item.AppRoles[i]</a>
+                                }
+                            </td>
+                            @if (@item.ClaimValue!.Count == 0)
+                            {
+                                <td></td>
+
+                            }
+                            else
+                            {
+                                <td>
+                                    @foreach (var claim in item.ClaimValue)
+                                    {
+
+                                        @if (@Convert.ToDateTime(claim.Value) < DateTime.Now)
+                                        {
+                                            if (claim.Type == "TrialExpireDate")
+                                            {
+                                                <a asp-route-userName="@item.UserName" asp-area="Admin" asp-controller="Admin" asp-action="TrialActivate" class="btn btn-secondary btn-sm mx-1">Expired!!</a>
+
+                                            }
+                                            if (claim.Type == "AdminObserveExpireDate")
+                                            {
+                                                <a asp-route-userName="@item.UserName" asp-area="Admin" asp-controller="Admin" asp-action="ObserveActivate" class="btn btn-secondary btn-sm mx-1">Expired!!</a>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-success btn-sm mx-1">Activated</a>
+                                        }
+
+                                    }
+                                </td>
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+
+

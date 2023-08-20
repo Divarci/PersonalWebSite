@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@await Component.InvokeAsync("AboutMeUser")
+@await Component.InvokeAsync("ProjectCategoryUser")
+@await Html.PartialAsync("/Views/Home/SendMessage.cshtml")
+
