@@ -26,8 +26,8 @@ namespace ServiceLayer.Helpers.TagHelpers
         {
             output.TagName = "img";
 
-            var signedInUser = _signInManager.Context.User.Identity!.Name!.ToString();
-            var user = await _userManager.FindByNameAsync(signedInUser);
+            var signedInUser = _signInManager.Context.User.Claims.First(x => x.Type.Contains("identifier")).Value;
+            var user = await _userManager.FindByIdAsync(signedInUser);
 
             if (!string.IsNullOrEmpty(user.FileName))
             {
