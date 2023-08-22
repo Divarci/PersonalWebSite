@@ -28,6 +28,13 @@ namespace ServiceLayer.Services.WebApplication.Concrete
             _messages = messages;
         }
 
+        public int NumberGenerator()
+        {
+            Random randomNumber = new();
+            return randomNumber.Next(0, 9);
+        }
+
+
         //ADMIN SIDE SERVICES-----------------
 
         //Listing Method
@@ -81,10 +88,18 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
         }
 
-        public int CaptchaGenerator()
+        public string CaptchaGenerator()
         {
-            Random randomNumber = new();
-            return randomNumber.Next(1000, 99999); ;
+            List<string> randomSigns = new() { "*", "/", "+", "!", "%", "£", "$", "^", "&", "=" };
+            List<string> captcha = new();
+            for (int i = 0; i < 3; i++)
+            {
+                captcha.Add(NumberGenerator().ToString());
+                captcha.Add(randomSigns[NumberGenerator()].ToString());
+            }
+            string captchaString = captcha[0] + captcha[1] + captcha[2] + captcha[3] + captcha[4] + captcha[5];
+
+            return captchaString;
         }
     }
 }

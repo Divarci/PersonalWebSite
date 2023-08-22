@@ -16,7 +16,7 @@ namespace ServiceLayer.Services.WebApplication.Abstract
 
         //Signatures for methods
         Task AddMessageAsync(MessageAddVM request);
-        int CaptchaGenerator();
+        string CaptchaGenerator();
 
     }
 }

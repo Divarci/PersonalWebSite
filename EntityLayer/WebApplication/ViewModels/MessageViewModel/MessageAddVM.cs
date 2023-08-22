@@ -15,9 +15,9 @@ namespace EntityLayer.WebApplication.ViewModels.MessageViewModel
         public string Email { get; set; } = null!;
        
         [DisplayName("Captcha")]
-        public int CatpchaGenerated { get; set; }
+        public string CatpchaGenerated { get; set; }
         [DisplayName("Confirm")]
-        public int CatpchaConfirm { get; set; }
+        public string CatpchaConfirm { get; set; } = null!;
 
     }
 }
