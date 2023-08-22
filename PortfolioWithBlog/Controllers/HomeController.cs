@@ -21,7 +21,9 @@ namespace PortfolioWithBlog.Controllers
         //----------
         public IActionResult Index()
         {
-            return View();
+            var captcha = _messageService.CaptchaGenerator();
+            return View(new MessageAddVM { CatpchaGenerated = captcha });
+         
         }
         
         //Send Message Partial View

@@ -13,9 +13,11 @@ namespace EntityLayer.WebApplication.ViewModels.MessageViewModel
         public string Description { get; set; } = null!;
         [DisplayName("Email")]
         public string Email { get; set; } = null!;
-
-        [DisplayName("I am Human")]
-        public bool ImHuman { get; set; }
+       
+        [DisplayName("Captcha")]
+        public int CatpchaGenerated { get; set; }
+        [DisplayName("Confirm")]
+        public int CatpchaConfirm { get; set; }
 
     }
 }

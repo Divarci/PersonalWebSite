@@ -23,9 +23,11 @@ namespace ServiceLayer.FluentValidation.WebApplication.MessageValidation
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage(GenericMessagesForFluentValidations.EmptyNullMessage("Email"))
                 .NotNull().WithMessage(GenericMessagesForFluentValidations.EmptyNullMessage("Email"))
-                .MaximumLength(100).WithMessage(GenericMessagesForFluentValidations.MaximumLength("100"));
-            RuleFor(x => x.ImHuman)
-                .Must(x => x == true).WithMessage(GenericMessagesForFluentValidations.ImHumanCheck());
+                .MaximumLength(100).WithMessage(GenericMessagesForFluentValidations.MaximumLength("100"));           
+            RuleFor(x => x.CatpchaConfirm)
+                .NotEmpty().WithMessage(GenericMessagesForFluentValidations.EmptyNullMessage("Password Confirm"))
+                .NotNull().WithMessage(GenericMessagesForFluentValidations.EmptyNullMessage("Password Confirm"))
+                .Equal(x => x.CatpchaGenerated).WithMessage(GenericMessagesForFluentValidations.ImHumanCheck());
         }
     }
 }

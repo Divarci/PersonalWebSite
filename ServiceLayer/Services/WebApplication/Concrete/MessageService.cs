@@ -15,11 +15,11 @@ namespace ServiceLayer.Services.WebApplication.Concrete
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<Message> _messageRepository;       
+        private readonly IGenericRepository<Message> _messageRepository;
         private readonly IToastNotification _toasty;
         private readonly IMessageMessages _messages;
 
-        public MessageService(IUnitOfWork unitOfWork, IMapper mapper, IGenericRepository<Message> messageRepository,IToastNotification toasty, IMessageMessages messages)
+        public MessageService(IUnitOfWork unitOfWork, IMapper mapper, IGenericRepository<Message> messageRepository, IToastNotification toasty, IMessageMessages messages)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -33,13 +33,13 @@ namespace ServiceLayer.Services.WebApplication.Concrete
         //Listing Method
         public async Task<IEnumerable<MessageAdminListVM>> GetMessageListAsync()
         {
-            var messages =await _messageRepository.Where(x => x.IsEdited == true).Include(x => x.Resume).OrderBy(x => x.CreatedDate).ProjectTo<MessageAdminListVM>(_mapper.ConfigurationProvider).ToListAsync();
+            var messages = await _messageRepository.Where(x => x.IsEdited == true).Include(x => x.Resume).OrderBy(x => x.CreatedDate).ProjectTo<MessageAdminListVM>(_mapper.ConfigurationProvider).ToListAsync();
             return messages;
         }
         //Listing for Dashboard
         public async Task<IEnumerable<MessageAdminListForDashboardVM>> GetMessageListForDashboardAsync()
         {
-            var messages = await _messageRepository.GetAll().Include(x => x.Resume).Where(x=>x.Resume.IsPublished==true).OrderByDescending(x => x.CreatedDate).Take(5).ProjectTo<MessageAdminListForDashboardVM>(_mapper.ConfigurationProvider).ToListAsync();
+            var messages = await _messageRepository.GetAll().Include(x => x.Resume).Where(x => x.Resume.IsPublished == true).OrderByDescending(x => x.CreatedDate).Take(5).ProjectTo<MessageAdminListForDashboardVM>(_mapper.ConfigurationProvider).ToListAsync();
             return messages;
         }
 
@@ -81,7 +81,10 @@ namespace ServiceLayer.Services.WebApplication.Concrete
 
         }
 
-
-
+        public int CaptchaGenerator()
+        {
+            Random randomNumber = new();
+            return randomNumber.Next(1000, 99999); ;
+        }
     }
 }
