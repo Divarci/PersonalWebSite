@@ -24,6 +24,8 @@ namespace ServiceLayer.FluentValidation.WebApplication.MessageValidation
                 .NotEmpty().WithMessage(GenericMessagesForFluentValidations.EmptyNullMessage("Email"))
                 .NotNull().WithMessage(GenericMessagesForFluentValidations.EmptyNullMessage("Email"))
                 .MaximumLength(100).WithMessage(GenericMessagesForFluentValidations.MaximumLength("100"));
+            RuleFor(x => x.ImHuman)
+                .Must(x => x == true).WithMessage(GenericMessagesForFluentValidations.ImHumanCheck());
         }
     }
 }

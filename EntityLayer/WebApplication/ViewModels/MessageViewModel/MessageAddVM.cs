@@ -14,5 +14,8 @@ namespace EntityLayer.WebApplication.ViewModels.MessageViewModel
         [DisplayName("Email")]
         public string Email { get; set; } = null!;
 
+        [DisplayName("I am Human")]
+        public bool ImHuman { get; set; }
+
     }
 }

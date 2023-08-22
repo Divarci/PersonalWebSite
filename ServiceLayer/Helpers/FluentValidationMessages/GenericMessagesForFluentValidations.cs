@@ -30,8 +30,11 @@
         {
             return $"You have to accept Terms and Conditions";
         }
+        public static string ImHumanCheck()
+        {
+            return $"You have to confirm you are not a Bot";
+        }
 
 
-        
     }
 }
