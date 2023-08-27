@@ -1,0 +1,21 @@
+﻿@model List<ArticleListVM>
+@{
+    ViewData["Title"] = "ArticleList";
+    Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <h1>@item.Title</h1>
+    <h1>@item.Content</h1>
+    <h1>@item.Author</h1>
+    <h1>@item.FileName</h1>
+    <h1>@item.CreatedDate</h1>
+    <h1>@item.UpdatedDate</h1>
+    <h1>@item.Category.Name</h1>
+
+    <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Article" asp-action="ArticleUpdate" asp-route-Id="@item.Id" class=" btn btn-outline-primary">upate</a>
+    <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Article" asp-action="ArticleDelete" asp-route-Id="@item.Id" class=" btn btn-outline-primary">delete</a>
+
+}
+

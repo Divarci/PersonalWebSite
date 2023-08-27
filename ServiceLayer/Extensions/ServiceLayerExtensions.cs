@@ -19,6 +19,7 @@ namespace ServiceLayer.Extensions
         {
             //Identity Extension Called
             services.LoadIdentityExtensions(configuration);
+            services.LoadBlogApiExtensions(configuration);
 
             //add automapper and seeks asemblies
             services.AddAutoMapper(Assembly.GetExecutingAssembly());

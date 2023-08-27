@@ -1,0 +1,27 @@
+﻿@model CategoryAddVM
+@{
+    ViewData["Title"] = "CategoryAdd";
+    Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CategoryAdd</h1>
+
+
+<form asp-area="BlogAPi" asp-controller="Category" asp-action="CategoryAdd" method="post" class="row g-12">
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="col-12">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" type="text" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+    </div>
+    <div class="text-center">
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
+    </div>
+</form>
+
+
+

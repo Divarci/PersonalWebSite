@@ -1,6 +1,7 @@
 using RepositoryLayer.Extensions;
 using ServiceLayer.Exceptions.Middleware;
 using ServiceLayer.Extensions;
+using ServiceLayer.Services.BlogApiConsumer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.LoadRepositoryLayerExtensions(builder.Configuration);
 builder.Services.LoadServiceLayerExtensions(builder.Configuration);
+
+
 
 
 
@@ -55,11 +58,16 @@ app.UseEndpoints(endpoints =>
        areaName: "User",
        pattern: "User/{controller=Dashboard}/{action=Index}/{id?}"
        );
-     endpoints.MapAreaControllerRoute(
-       name: "GuildWarsTwo",
-       areaName: "GuildWarsTwo",
-       pattern: "GuildWarsTwo/{controller=Dashboard}/{action=Index}/{id?}"
-       );
+    endpoints.MapAreaControllerRoute(
+      name: "GuildWarsTwo",
+      areaName: "GuildWarsTwo",
+      pattern: "GuildWarsTwo/{controller=Dashboard}/{action=Index}/{id?}"
+      );
+    endpoints.MapAreaControllerRoute(
+     name: "BlogApi",
+     areaName: "BlogApi",
+     pattern: "BlogApi/{controller=Article}/{action=GetAllArticles}/{id?}"
+     );
     endpoints.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

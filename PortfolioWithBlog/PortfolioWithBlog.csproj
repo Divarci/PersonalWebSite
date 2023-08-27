@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\BlogApi\Models\" />
     <Folder Include="Areas\GuildWarsTwo\Models\" />
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Logs\" />
