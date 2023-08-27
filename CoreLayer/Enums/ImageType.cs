@@ -1,4 +1,4 @@
-﻿namespace EntityLayer.Enums
+﻿namespace CoreLayer.Enums
 {
     public enum ImageType
     {

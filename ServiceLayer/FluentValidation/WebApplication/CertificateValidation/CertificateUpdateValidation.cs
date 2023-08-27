@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.CertificateViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.CertificateViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.CertificateValidation
 {

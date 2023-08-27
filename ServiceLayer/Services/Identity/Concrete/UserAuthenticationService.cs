@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
-using EntityLayer.Enums;
+using CoreLayer.Enums;
+using CoreLayer.Messages.ToastyMessages;
 using EntityLayer.Identity.Entities;
 using EntityLayer.Identity.ViewModes;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using NToastNotify;
 using ServiceLayer.Helpers.ImagesHelper;
-using ServiceLayer.Helpers.ToastyMessages;
 using ServiceLayer.Services.Identity.Abstract;
 using System.Security.Claims;
-using System.Security.Principal;
 
 namespace ServiceLayer.Services.Identity.Concrete
 {

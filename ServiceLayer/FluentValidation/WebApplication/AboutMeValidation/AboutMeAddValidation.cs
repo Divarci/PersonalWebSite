@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.AboutMeViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.AboutMeViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.AboutMeValidation
 {

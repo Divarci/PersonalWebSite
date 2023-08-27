@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.EducationViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.EducationViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.EducationValidaton
 {

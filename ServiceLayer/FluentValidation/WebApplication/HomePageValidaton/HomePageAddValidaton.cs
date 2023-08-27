@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.HomePageViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.HomePageViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.HomePageValidaton
 {

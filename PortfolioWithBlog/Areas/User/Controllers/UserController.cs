@@ -5,10 +5,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify;
-using NuGet.Protocol;
 using ServiceLayer.Helpers.ModelStateHelper;
-using ServiceLayer.Helpers.ToastyMessages;
 using ServiceLayer.Services.Identity.Abstract;
 
 namespace PortfolioWithBlog.Areas.User.Controllers

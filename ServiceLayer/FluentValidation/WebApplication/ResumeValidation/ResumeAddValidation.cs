@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.ResumeViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.ResumeViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.ResumeValidation
 {

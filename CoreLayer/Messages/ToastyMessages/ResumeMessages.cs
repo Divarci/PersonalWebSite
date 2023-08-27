@@ -1,4 +1,4 @@
-﻿namespace ServiceLayer.Helpers.ToastyMessages
+﻿namespace CoreLayer.Messages.ToastyMessages
 {
     // special messages added for Resume
 
@@ -6,14 +6,14 @@
     {
         string Inaktivated(string title);
         string Aktivated(string title);
-        string CanNotDelete (string title);
-        string Published (string title);
-        string Editable (string title);
+        string CanNotDelete(string title);
+        string Published(string title);
+        string Editable(string title);
     }
 
     public class ResumeMessages : GenericMessages, IResumeMessages
     {
-        public string Aktivated (string title)
+        public string Aktivated(string title)
         {
             return $"{title} has been activated Successfully!";
         }

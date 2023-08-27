@@ -1,4 +1,5 @@
-﻿using EntityLayer.Identity.Entities;
+﻿using CoreLayer.Messages.ToastyMessages;
+using EntityLayer.Identity.Entities;
 using EntityLayer.Identity.ViewModes;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using ServiceLayer.Helpers.EmailHelper;
 using ServiceLayer.Helpers.ModelStateHelper;
-using ServiceLayer.Helpers.ToastyMessages;
 using ServiceLayer.Services.Identity.Abstract;
 
 namespace PortfolioWithBlog.Controllers

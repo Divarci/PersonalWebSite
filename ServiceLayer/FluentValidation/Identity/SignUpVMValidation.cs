@@ -1,6 +1,6 @@
-﻿using EntityLayer.Identity.ViewModes;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.Identity.ViewModes;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.Identity
 {

@@ -1,4 +1,4 @@
-﻿namespace EntityLayer.BlogApi.GenericResponseVM
+﻿namespace EntityLayer.BlogApi.ResponseViewModel
 {
     public class CustomResponseVM<T>
     {

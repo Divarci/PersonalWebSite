@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.ProjectImageViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.ProjectImageViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.ProjectImageValidation
 {

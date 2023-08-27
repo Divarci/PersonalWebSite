@@ -1,4 +1,4 @@
-﻿namespace ServiceLayer.Helpers.FluentValidationMessages
+﻿namespace CoreLayer.Messages.FluentValidationMessages
 {
     public static class GenericMessagesForFluentValidations
     {

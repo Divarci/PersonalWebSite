@@ -1,14 +1,14 @@
-﻿using FluentValidation;
+﻿using CoreLayer.Messages.ToastyMessages;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NToastNotify;
 using Serilog;
-using ServiceLayer.Exceptions.Filters;
+using ServiceLayer.Exceptions.Filters.WebApplication;
 using ServiceLayer.FluentValidation.WebApplication.AboutMeValidation;
 using ServiceLayer.Helpers.EmailHelper;
 using ServiceLayer.Helpers.ImagesHelper;
-using ServiceLayer.Helpers.ToastyMessages;
 using System.Reflection;
 
 namespace ServiceLayer.Extensions

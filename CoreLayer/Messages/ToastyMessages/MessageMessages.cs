@@ -1,4 +1,4 @@
-﻿namespace ServiceLayer.Helpers.ToastyMessages
+﻿namespace CoreLayer.Messages.ToastyMessages
 {
     // special messages added for Messages
 

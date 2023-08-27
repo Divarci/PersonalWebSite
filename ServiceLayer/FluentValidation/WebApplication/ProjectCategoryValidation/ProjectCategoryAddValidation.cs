@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.ProjectCategoryViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.ProjectCategoryViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.ProjectCategoryValidation
 {

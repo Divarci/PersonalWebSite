@@ -1,4 +1,4 @@
-﻿using EntityLayer.Enums;
+﻿using CoreLayer.Enums;
 using EntityLayer.WebApplication.ViewModels.GenericImageVM;
 using Microsoft.AspNetCore.Http;
 

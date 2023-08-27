@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.NewsFeedVM;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.NewsFeedVM;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.NewsFeedValidation
 {

@@ -1,8 +1,6 @@
-﻿using EntityLayer.BlogApi.GenericResponseVM;
-using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
+﻿using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RepositoryLayer.Migrations;
 using ServiceLayer.Helpers.ModelStateHelper;
 using ServiceLayer.Services.BlogApiConsumer;
 

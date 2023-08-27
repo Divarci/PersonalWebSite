@@ -4,25 +4,25 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Repository.Generic.Abstract;
 
-namespace ServiceLayer.Exceptions.Filters
+namespace ServiceLayer.Exceptions.Filters.WebApplication
 {
-    public class HomePageDataCheckFilter : IAsyncActionFilter
+    public class AboutMeDataCheckFilter : IAsyncActionFilter
     {
-        private readonly IGenericRepository<HomePage> _genericRepository;
+        private readonly IGenericRepository<AboutMe> _genericRepository;
 
-        public HomePageDataCheckFilter(IGenericRepository<HomePage> genericRepository)
+        public AboutMeDataCheckFilter(IGenericRepository<AboutMe> genericRepository)
         {
             _genericRepository = genericRepository;
         }
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            //my concept allows me to have just one homepage section in a resume. So if i have one, this filter prevents to add a new one
+            //my concept allows me to have just one aboutme section in a resume. So if i have one, this filter prevents to add a new one
             var aboutMe = await _genericRepository.Where(x => x.IsEdited == true).SingleOrDefaultAsync();
 
             if (aboutMe != null)
             {
-                context.Result = new RedirectToActionResult("HomePageList", "HomePage", new { Area = "Admin" });
+                context.Result = new RedirectToActionResult("AboutMeListWithAllChildren", "AboutMe", new { Area = "Admin" });
                 return;
             }
 
@@ -32,3 +32,4 @@ namespace ServiceLayer.Exceptions.Filters
         }
     }
 }
+

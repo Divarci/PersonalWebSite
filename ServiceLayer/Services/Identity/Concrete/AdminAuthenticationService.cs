@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using CoreLayer.Messages.ToastyMessages;
 using EntityLayer.Identity.Entities;
 using EntityLayer.Identity.ViewModes;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
-using ServiceLayer.Helpers.ToastyMessages;
 using ServiceLayer.Services.Identity.Abstract;
 using System.Security.Claims;
 

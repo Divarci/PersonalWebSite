@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using EntityLayer.Enums;
+using CoreLayer.Enums;
+using CoreLayer.Messages.ToastyMessages;
 using EntityLayer.WebApplication.Entities;
 using EntityLayer.WebApplication.ViewModels.ProjectImageViewModel;
 using EntityLayer.WebApplication.ViewModels.ProjectViewModel;
@@ -9,7 +10,6 @@ using NToastNotify;
 using RepositoryLayer.Repository.Generic.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
 using ServiceLayer.Helpers.ImagesHelper;
-using ServiceLayer.Helpers.ToastyMessages;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace ServiceLayer.Services.WebApplication.Concrete

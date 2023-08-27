@@ -1,10 +1,10 @@
 ﻿using CoreLayer.BaseEntity;
-using EntityLayer.Errors;
+using CoreLayer.Errors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using RepositoryLayer.Repository.Generic.Abstract;
 
-namespace ServiceLayer.Exceptions.Filters
+namespace ServiceLayer.Exceptions.Filters.WebApplication
 {
     public class GenericNotFoundFilter<T> : IAsyncActionFilter where T : BaseEntity
     {
@@ -23,9 +23,7 @@ namespace ServiceLayer.Exceptions.Filters
             //if value is null return error. On address bar it might be typed in non-digit character
             if (value == null)
             {
-                var errorVMForUnknownId = new NotFoundVM();
-                errorVMForUnknownId.Errors.Add($"Data {value} is invalid. Please double-check the entered information and try again.");
-
+                var errorVMForUnknownId = new ErrorVM($"Data {value} is invalid. Please double-check the entered information and try again.");             
                 context.Result = new RedirectToActionResult("ValueNotFound", "Dashboard", errorVMForUnknownId);
                 return;
             }
@@ -50,9 +48,7 @@ namespace ServiceLayer.Exceptions.Filters
             }
 
             //if it is not data does not exist
-            var errorVModel = new NotFoundVM();
-            errorVModel.Errors.Add($"Data {id} is not found. Please double-check the entered information and try again.");
-
+            var errorVModel = new ErrorVM($"Data {id} is not found. Please double-check the entered information and try again.");           
             context.Result = new RedirectToActionResult("ValueNotFound", "Dashboard", errorVModel);
         }
     }

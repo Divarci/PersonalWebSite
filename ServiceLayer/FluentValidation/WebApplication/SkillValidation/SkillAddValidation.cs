@@ -1,6 +1,6 @@
-﻿using EntityLayer.WebApplication.ViewModels.SkillViewModel;
+﻿using CoreLayer.Messages.FluentValidationMessages;
+using EntityLayer.WebApplication.ViewModels.SkillViewModel;
 using FluentValidation;
-using ServiceLayer.Helpers.FluentValidationMessages;
 
 namespace ServiceLayer.FluentValidation.WebApplication.SkillValidation
 {

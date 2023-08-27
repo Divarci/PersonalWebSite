@@ -1,4 +1,4 @@
-﻿namespace ServiceLayer.Helpers.ToastyMessages
+﻿namespace CoreLayer.Messages.ToastyMessages
 {
     //toast message interface
     public interface IGenericMessages

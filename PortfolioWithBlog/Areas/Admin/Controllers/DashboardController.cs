@@ -1,4 +1,4 @@
-﻿using EntityLayer.Errors;
+﻿using CoreLayer.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +16,7 @@ namespace PortfolioWithBlog.Areas.Admin.Controllers
         }
 
         //Exception Pages
-        public IActionResult ValueNotFound(NotFoundVM error)
+        public IActionResult ValueNotFound(ErrorVM error)
         {
             return View(error);
         }

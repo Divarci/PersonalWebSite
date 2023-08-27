@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using CoreLayer.Messages.ToastyMessages;
 using EntityLayer.WebApplication.Entities;
 using EntityLayer.WebApplication.ViewModels.EducationViewModel;
 using EntityLayer.WebApplication.ViewModels.ResumeViewModel;
@@ -7,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using RepositoryLayer.Repository.Generic.Abstract;
 using RepositoryLayer.UnitOfWorks.Abstract;
-using ServiceLayer.Helpers.ToastyMessages;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace ServiceLayer.Services.WebApplication.Concrete

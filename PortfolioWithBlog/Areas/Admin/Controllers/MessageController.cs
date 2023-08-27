@@ -1,7 +1,7 @@
 ﻿using EntityLayer.WebApplication.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Exceptions.Filters;
+using ServiceLayer.Exceptions.Filters.WebApplication;
 using ServiceLayer.Services.WebApplication.Abstract;
 
 namespace PortfolioWithBlog.Areas.Admin.Controllers
