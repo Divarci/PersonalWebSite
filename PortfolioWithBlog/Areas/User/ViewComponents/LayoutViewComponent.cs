@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Services.Identity.Abstract;
+using ServiceLayer.Identity.Services.Abstract;
 using System.Security.Claims;
 using System.Security.Principal;
 

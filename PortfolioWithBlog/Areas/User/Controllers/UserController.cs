@@ -5,8 +5,8 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Helpers.ModelStateHelper;
-using ServiceLayer.Services.Identity.Abstract;
+using ServiceLayer._SharedFolder.Helpers.ModalStateHelper;
+using ServiceLayer.Identity.Services.Abstract;
 
 namespace PortfolioWithBlog.Areas.User.Controllers
 {

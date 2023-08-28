@@ -4,8 +4,8 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Exceptions.Filters.WebApplication;
-using ServiceLayer.Services.WebApplication.Abstract;
+using ServiceLayer.WebApplication.Filters;
+using ServiceLayer.WebApplication.Services.Abstract;
 
 namespace PortfolioWithBlog.Areas.Admin.Controllers
 {

@@ -1,12 +1,11 @@
 ﻿using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Helpers.ModelStateHelper;
-using ServiceLayer.Services.BlogApiConsumer;
+using ServiceLayer._SharedFolder.Helpers.ModalStateHelper;
+using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
     [Area("BlogApi")]
     public class ArticleController : Controller
     {

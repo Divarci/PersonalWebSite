@@ -1,7 +1,7 @@
 using RepositoryLayer.Extensions;
-using ServiceLayer.Exceptions.Middleware;
-using ServiceLayer.Extensions;
-using ServiceLayer.Services.BlogApiConsumer;
+using ServiceLayer._SharedFolder.Extensions;
+using ServiceLayer._SharedFolder.Middlewares;
+using ServiceLayer.Identity.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 

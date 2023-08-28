@@ -1,14 +1,13 @@
-﻿using CoreLayer.Messages.ToastyMessages;
-using EntityLayer.Identity.Entities;
+﻿using EntityLayer.Identity.Entities;
 using EntityLayer.Identity.ViewModes;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
-using ServiceLayer.Helpers.EmailHelper;
-using ServiceLayer.Helpers.ModelStateHelper;
-using ServiceLayer.Services.Identity.Abstract;
+using ServiceLayer._SharedFolder.Helpers.ModalStateHelper;
+using ServiceLayer._SharedFolder.Messages.ToastyNotification;
+using ServiceLayer.Identity.Services.Abstract;
 
 namespace PortfolioWithBlog.Controllers
 {

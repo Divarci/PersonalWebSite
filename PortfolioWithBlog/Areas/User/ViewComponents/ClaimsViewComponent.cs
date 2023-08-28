@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServiceLayer.Services.WebApplication.Abstract;
+using ServiceLayer.WebApplication.Services.Abstract;
 
 namespace PortfolioWithBlog.Areas.User.ViewComponents
 {
