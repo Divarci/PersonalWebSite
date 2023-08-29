@@ -1,4 +1,4 @@
-﻿using EntityLayer.BlogApi.ResponseViewModel;
+﻿using CoreLayer.ResponseModel;
 using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
 using Newtonsoft.Json;
 using System.Net.Http.Json;

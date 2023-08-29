@@ -1,4 +1,4 @@
-﻿namespace EntityLayer.Identity.AuthServer
+﻿namespace EntityLayer.AuthServer.Entities
 {
     public class UserRefreshToken
     {
