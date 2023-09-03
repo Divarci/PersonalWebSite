@@ -1,4 +1,5 @@
 ﻿using CoreLayer.BaseEntity;
+using EntityLayer.AuthServer.Entities;
 using EntityLayer.Identity.Entities;
 using EntityLayer.WebApplication.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -31,6 +32,14 @@ namespace RepositoryLayer.Context
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<NewsFeed> NewsFeeds { get; set; }
+
+
+
+        //AuthServer
+        public DbSet<RefreshToken> AuthRefreshToken { get; set; }
+        public DbSet<AccessToken> AuthAccessToken { get; set; }
+
+
 
         //override for seeking assemblies
         protected override void OnModelCreating(ModelBuilder modelBuilder)

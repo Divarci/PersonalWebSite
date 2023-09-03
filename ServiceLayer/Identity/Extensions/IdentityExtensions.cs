@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RepositoryLayer.Context;
 using ServiceLayer.Identity.Customization.ErrorDescriber;
 using ServiceLayer.Identity.Customization.Validators;
+using ServiceLayer.Identity.Helpers.EmailHelper;
 using ServiceLayer.Identity.Requirements;
 
 namespace ServiceLayer.Identity.Extensions
@@ -16,6 +17,9 @@ namespace ServiceLayer.Identity.Extensions
     {
         public static IServiceCollection LoadIdentityExtensions(this IServiceCollection services, IConfiguration configuration)
         {
+            //DI for Helpers
+            services.AddScoped<IEmailHelper, EmailHelper>();
+
             //Identity DI and options
             services.AddIdentity<AppUser, AppRole>(opt =>
             {

@@ -1,82 +1,65 @@
-﻿using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
-using Microsoft.AspNetCore.Authorization;
+﻿using CoreLayer.Enums;
+using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer._SharedFolder.Helpers.ModalStateHelper;
+using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
+    [ServiceFilter(typeof(RequestToApi))]
     [Area("BlogApi")]
-    public class ArticleController : Controller
+    public class ArticleController : _BaseController<ArticleController>
     {
         private readonly ArticleServiceApi _articleServiceApi;
 
         public ArticleController(ArticleServiceApi articleServiceApi)
         {
             _articleServiceApi = articleServiceApi;
+
         }
 
-        public async Task<IActionResult> ArticleList()
+        public async Task<IActionResult> List()
         {
-            var articleList = await _articleServiceApi.GetAllArticleAsync();
-            return View(articleList);
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _articleServiceApi.GetAllArticleAsync(myClient!);
+            return HandleResponse(response, BlogCrudType.Select);
         }
 
         [HttpGet]
         public async Task<IActionResult> ArticleUpdate(int id)
         {
-            var getResult = await _articleServiceApi.GetArticleByIdAsync(id);
-            if (getResult.Item1 != null)
-            {
-                return View(getResult.Item1);
-            }
-
-            return RedirectToAction("NotFound", "Error", new { Area = "BlogApi", errors = getResult.Item2.Errors });
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _articleServiceApi.GetArticleByIdAsync(id, myClient!);
+            return HandleResponse(response, BlogCrudType.Select);
         }
         [HttpPost]
         public async Task<IActionResult> ArticleUpdate(ArticleUpdateVM updatedArticle)
         {
-            var putResult = await _articleServiceApi.ArticleUpdateAsync(updatedArticle);
-            if(putResult.Item2 == null)
-            {
-                return RedirectToAction("ArticleList", "Article", new { Area = "BlogApi" });
-            }
-
-            ModelState.AddModelErrorList(putResult.Item1.Errors!);
-            return View(new ArticleUpdateVM { Categories = putResult.Item2 });
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _articleServiceApi.ArticleUpdateAsync(updatedArticle, myClient!);
+            return HandleResponse(response, BlogCrudType.Update);
         }
 
         [HttpGet]
         public async Task<IActionResult> ArticleAdd()
         {
-            var categories = await _articleServiceApi.GetCategoriesForDropDown();
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var categories = await _articleServiceApi.GetCategoriesForDropDown(myClient!);
             return View(new ArticleAddVM { Categories = categories });
         }
         [HttpPost]
         public async Task<IActionResult> ArticleAdd(ArticleAddVM newArticle)
         {
-            var postResult = await _articleServiceApi.AddArticleAsync(newArticle);
-            if (postResult.Errors == null)
-            {
-                return RedirectToAction("ArticleList", "Article", new { Area = "BlogApi" });
-            }
-
-            ModelState.AddModelErrorList(postResult.Errors);    
-            return View(postResult.Data);
-
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _articleServiceApi.AddArticleAsync(newArticle, myClient!);
+            return HandleResponse(response, BlogCrudType.Create);
         }
 
         public async Task<IActionResult> ArticleDelete(int id)
         {
-            var deleteResult = await _articleServiceApi.DeleteArticleAsync(id);
-            if(deleteResult.Item2)
-            {
-                return RedirectToAction("ArticleList", "Article", new { Area = "BlogApi" });
-            }
-
-            ModelState.AddModelErrorList(deleteResult.Item1.Errors!);
-            return RedirectToAction("NotFound", "Error", new { Area = "BlogApi", errors = deleteResult.Item1.Errors });
-
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _articleServiceApi.DeleteArticleAsync(id, myClient!);
+            return HandleResponse(response, BlogCrudType.Delete);
         }
     }
 

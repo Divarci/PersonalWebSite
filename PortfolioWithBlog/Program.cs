@@ -12,9 +12,6 @@ builder.Services.LoadRepositoryLayerExtensions(builder.Configuration);
 builder.Services.LoadServiceLayerExtensions(builder.Configuration);
 
 
-
-
-
 var app = builder.Build();
 
 //using( var scope = app.Services.CreateScope())
@@ -26,7 +23,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseMiddleware<ExceptionHandlerWithLogging>();
+   
 
 
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -34,15 +31,17 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStatusCodePagesWithReExecute("/Home/PageNotFound");
 //app.UseExceptionHandler("/Home/GeneralException");
+app.UseMiddleware<ExceptionHandlerWithLogging>();
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseMiddleware<SecurityStampCheck>();
 app.UseMiddleware<RefreshCookie>();
+
 
 
 app.UseNToastNotify();
@@ -54,23 +53,23 @@ app.UseEndpoints(endpoints =>
         pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}"
         );
     endpoints.MapAreaControllerRoute(
-       name: "User",
-       areaName: "User",
-       pattern: "User/{controller=Dashboard}/{action=Index}/{id?}"
-       );
+        name: "User",
+        areaName: "User",
+        pattern: "User/{controller=Dashboard}/{action=Index}/{id?}"
+        );
     endpoints.MapAreaControllerRoute(
-      name: "GuildWarsTwo",
-      areaName: "GuildWarsTwo",
-      pattern: "GuildWarsTwo/{controller=Dashboard}/{action=Index}/{id?}"
-      );
+        name: "GuildWarsTwo",
+        areaName: "GuildWarsTwo",
+        pattern: "GuildWarsTwo/{controller=Dashboard}/{action=Index}/{id?}"
+        );
     endpoints.MapAreaControllerRoute(
-     name: "BlogApi",
-     areaName: "BlogApi",
-     pattern: "BlogApi/{controller=Article}/{action=GetAllArticles}/{id?}"
-     );
+        name: "BlogApi",
+        areaName: "BlogApi",
+        pattern: "BlogApi/{controller=Article}/{action=GetAllArticles}/{id?}"
+        );
     endpoints.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 

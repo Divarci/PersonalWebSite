@@ -1,6 +1,6 @@
 ﻿namespace EntityLayer.AuthServer.Entities
 {
-    public class UserRefreshToken
+    public class AccessToken
     {
         public string UserId { get; set; } = null!;
         public string Code { get; set; } = null!;

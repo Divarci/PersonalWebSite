@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using ServiceLayer._SharedFolder.Helpers.ModalStateHelper;
 using ServiceLayer._SharedFolder.Messages.ToastyNotification;
+using ServiceLayer.AuthServer.Services.Abstract;
 using ServiceLayer.Identity.Services.Abstract;
 
 namespace PortfolioWithBlog.Controllers
@@ -22,9 +23,10 @@ namespace PortfolioWithBlog.Controllers
         private readonly IValidator<ResetPasswordVM> _validatorReset;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ITokenAuthenticationService _tokenService;
 
 
-        public AuthenticationController(ICustomAuthenticationService authentication, IToastNotification toasty, IIdentityMessages messages, IValidator<SignUpVM> validatorSignUp, IValidator<SignInVM> validatorSignIn, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IValidator<ForgotPasswordVM> validatorForgot, IValidator<ResetPasswordVM> validatorReset)
+        public AuthenticationController(ICustomAuthenticationService authentication, IToastNotification toasty, IIdentityMessages messages, IValidator<SignUpVM> validatorSignUp, IValidator<SignInVM> validatorSignIn, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IValidator<ForgotPasswordVM> validatorForgot, IValidator<ResetPasswordVM> validatorReset, ITokenAuthenticationService tokenService)
         {
             _authentication = authentication;
             _toasty = toasty;
@@ -35,6 +37,7 @@ namespace PortfolioWithBlog.Controllers
             _signInManager = signInManager;
             _validatorForgot = validatorForgot;
             _validatorReset = validatorReset;
+            _tokenService = tokenService;
         }
 
 
@@ -78,6 +81,7 @@ namespace PortfolioWithBlog.Controllers
             var signInResult = await _signInManager.PasswordSignInAsync(hasUser, request.Password, request.RememberMe, true);
             if (signInResult.Succeeded)
             {
+                await _tokenService.CreateTokenAsync(hasUser);
                 _toasty.AddSuccessToastMessage(_messages.SuccessfulLogin(hasUser.UserName), new ToastrOptions { Title = "Welcome" });
                 return Redirect(returnUrl!);
             }

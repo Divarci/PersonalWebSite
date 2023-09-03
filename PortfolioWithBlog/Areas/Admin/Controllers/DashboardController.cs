@@ -16,9 +16,9 @@ namespace PortfolioWithBlog.Areas.Admin.Controllers
         }
 
         //Exception Pages
-        public IActionResult ValueNotFound(ErrorVM error)
+        public IActionResult ValueNotFound(ErrorVM errors)
         {
-            return View(error);
+            return View(errors);
         }
     }
 }

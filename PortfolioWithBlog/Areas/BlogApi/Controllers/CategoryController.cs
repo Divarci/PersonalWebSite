@@ -1,13 +1,14 @@
-﻿using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
-using Microsoft.AspNetCore.Authorization;
+﻿using CoreLayer.Enums;
+using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
 using Microsoft.AspNetCore.Mvc;
-using ServiceLayer._SharedFolder.Helpers.ModalStateHelper;
+using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
+    [ServiceFilter(typeof(RequestToApi))]
     [Area("BlogApi")]
-    public class CategoryController : Controller
+    public class CategoryController : _BaseController<CategoryController>
     {
         private readonly CategoryServiceApi _categoryServiceApi;
 
@@ -15,35 +16,27 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
         {
             _categoryServiceApi = categoryServiceApi;
         }
-
-
-        public async Task<IActionResult> CategoryList()
+     
+        public async Task<IActionResult> List()
         {
-            var categoryList = await _categoryServiceApi.GetCategoryListAsync();
-            return View(categoryList);
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _categoryServiceApi.GetCategoryListAsync(myClient!);
+            return HandleResponse(response, BlogCrudType.Select);
         }
         [HttpGet]
         public async Task<IActionResult> CategoryUpdate(int id)
         {
-            var getResult = await _categoryServiceApi.GetCategoryByIdAsync(id);
-            if (getResult.Item1 != null)
-            {
-                return View(getResult.Item1);
-            }
-
-            return RedirectToAction("NotFound", "Error", new { Area = "BlogApi", errors = getResult.Item2.Errors });
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _categoryServiceApi.GetCategoryByIdAsync(id, myClient!);
+            return HandleResponse(response, BlogCrudType.Select);
         }
 
         [HttpPost]
         public async Task<IActionResult> CategoryUpdate(CategoryUpdateVM updatedCategory)
         {
-            var putResult = await _categoryServiceApi.UpdateCategoryAsync(updatedCategory);
-            if (putResult.Item2 == true)
-            {
-                return RedirectToAction("categoryList", "Category", new { Area = "BlogApi" });
-            }
-            ModelState.AddModelErrorList(putResult.Item1.Errors!);
-            return View();
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _categoryServiceApi.UpdateCategoryAsync(updatedCategory, myClient!);
+            return HandleResponse(response, BlogCrudType.Update);
         }
 
         [HttpGet]
@@ -55,27 +48,16 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CategoryAdd(CategoryAddVM newcategory)
         {
-            var postResult = await _categoryServiceApi.AddCategoryAsync(newcategory);
-            if(postResult.Data != null)
-            {
-                return RedirectToAction("categoryList", "Category", new { Area = "BlogApi" });
-            }
-
-            ModelState.AddModelErrorList(postResult.Errors!);
-            return View();
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _categoryServiceApi.AddCategoryAsync(newcategory, myClient!);
+            return HandleResponse(response, BlogCrudType.Create);
         }
 
         public async Task<IActionResult> CategoryDelete(int id)
         {
-            var deleteResult = await _categoryServiceApi.DeleteCategoryAsync(id);
-            if(deleteResult.Item2 == true)
-            {
-                return RedirectToAction("categoryList", "Category", new { Area = "BlogApi" });
-            }
-
-            ModelState.AddModelErrorList(deleteResult.Item1.Errors!);
-            return RedirectToAction("NotFound", "Error", new { Area = "BlogApi", errors = deleteResult.Item1.Errors });
-
+            var myClient = HttpContext.Items["Token"] as HttpClient;
+            var response = await _categoryServiceApi.DeleteCategoryAsync(id, myClient!);
+            return HandleResponse(response, BlogCrudType.Delete);
         }
     }
 }

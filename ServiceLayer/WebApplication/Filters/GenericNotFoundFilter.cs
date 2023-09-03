@@ -23,7 +23,7 @@ namespace ServiceLayer.WebApplication.Filters
             //if value is null return error. On address bar it might be typed in non-digit character
             if (value == null)
             {
-                var errorVMForUnknownId = new ErrorVM($"Data {value} is invalid. Please double-check the entered information and try again.");
+                var errorVMForUnknownId = new ErrorVM($"Data {value} is invalid. Please double-check the entered information and try again.",404);
                 context.Result = new RedirectToActionResult("ValueNotFound", "Dashboard", errorVMForUnknownId);
                 return;
             }
@@ -48,7 +48,7 @@ namespace ServiceLayer.WebApplication.Filters
             }
 
             //if it is not data does not exist
-            var errorVModel = new ErrorVM($"Data {id} is not found. Please double-check the entered information and try again.");
+            var errorVModel = new ErrorVM($"Data {id} is not found. Please double-check the entered information and try again.", 404);
             context.Result = new RedirectToActionResult("ValueNotFound", "Dashboard", errorVModel);
         }
     }

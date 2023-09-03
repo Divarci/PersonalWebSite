@@ -10,6 +10,6 @@ namespace RepositoryLayer.UnitOfWorks.Abstract
         Task<string> CommitAsync();
         string Commit();
         Task<IDbContextTransaction> BeginTransactionAsync();
-        IGenericRepository<T> GetGenericRepository<T>() where T : BaseEntity, new();
+        IGenericRepository<T> GetGenericRepository<T>() where T : class, new();
     }
 }

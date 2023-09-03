@@ -1,10 +1,6 @@
 ﻿using EntityLayer.Identity.Entities;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using System.Data;
-using System.Security.Claims;
 
 namespace ServiceLayer.Identity.Middlewares
 {
@@ -47,9 +43,7 @@ namespace ServiceLayer.Identity.Middlewares
 
             await signInManager.SignOutAsync();
             await signInManager.SignInAsync(user, isPersistent: false);
-
-            context.Response.Redirect("/Admin/Dashboard/Index");
-
+                        
             await _next(context);
             return;
 

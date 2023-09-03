@@ -1,29 +1,31 @@
-﻿namespace CoreLayer.Errors
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CoreLayer.Errors
 {
     public class ErrorVM
     {
-        public List<string> Errors { get; set; } = new List<string>();
 
-        public bool IsShow { get; set; }
+        public List<string> Error { get; set; } = new List<string>();
+        public short StatusCode { get; set; }
 
         public ErrorVM()
         {
-            Errors = new List<string>();
-        }
-        public ErrorVM(string error)
-        {
-            Errors.Add(error);
-        }
 
-        public ErrorVM(string error, bool isShow)
-        {
-            Errors.Add(error);
-            isShow = true;
         }
-        public ErrorVM(List<string> error, bool isShow)
+        public ErrorVM(List<string> errors, short statusCode)
         {
-            Errors = error;
-            IsShow = isShow;
+            Error = errors;
+            StatusCode = statusCode;
         }
+        public ErrorVM(string error, short statusCode)
+        {
+            Error = new List<string> {  error };
+            StatusCode = statusCode;
+        }
+      
     }
 }

@@ -1,5 +1,6 @@
 ﻿using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace EntityLayer.BlogApi.ViewModels.ArticleViewModels
 {

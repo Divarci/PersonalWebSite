@@ -1,7 +1,10 @@
 ﻿using CoreLayer.ResponseModel;
+using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
 using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Net.Http.Json;
+using System.Text;
 
 namespace ServiceLayer.BlogApiClient.Services
 {
@@ -12,67 +15,58 @@ namespace ServiceLayer.BlogApiClient.Services
         public CategoryServiceApi(HttpClient httpClient)
         {
             _httpClient = httpClient;
+           
         }
 
-        public async Task<List<CategoryListVM>> GetCategoryListAsync()
+        public async Task<(CustomResponseVM<List<CategoryListVM>>,short)> GetCategoryListAsync(HttpClient myClient)
         {
-            var responseCategoryList = await _httpClient.GetFromJsonAsync<CustomResponseVM<List<CategoryListVM>>>("Category");
-            return responseCategoryList.Data;
 
+            var response = await myClient.GetAsync("Category");
+            var contentCategoryList = JsonConvert.DeserializeObject<CustomResponseVM<List<CategoryListVM>>>(await response.Content.ReadAsStringAsync());
+            var statusCode = Convert.ToInt16(response.StatusCode);
+            return (contentCategoryList, statusCode);
         }
 
-        public async Task<(CategoryUpdateVM, CustomResponseVM<NoContentVM>)> GetCategoryByIdAsync(int id)
+        public async Task<(CustomResponseVM<CategoryUpdateVM>,short)> GetCategoryByIdAsync(int id, HttpClient myClient)
         {
-            var responseCategory = await _httpClient.GetAsync($"Category/{id}");
-            var contentCategory = await responseCategory.Content.ReadAsStringAsync();
-            if (!responseCategory.IsSuccessStatusCode)
-            {
-                var errorList = JsonConvert.DeserializeObject<CustomResponseVM<NoContentVM>>(contentCategory);
-                return (null, errorList)!;
-            }
-
-            var success = JsonConvert.DeserializeObject<CustomResponseVM<CategoryUpdateVM>>(contentCategory);
-            return (success.Data, null)!;
+            var response = await myClient.GetAsync($"Category/{id}");
+            var contentCategory = JsonConvert.DeserializeObject<CustomResponseVM<CategoryUpdateVM>>(await response.Content.ReadAsStringAsync());
+            var statusCode = Convert.ToInt16(response.StatusCode);
+            return (contentCategory, statusCode);
         }
 
-        public async Task<(CustomResponseVM<NoContentVM>, bool)> UpdateCategoryAsync(CategoryUpdateVM updatedCategory)
+        public async Task<(CustomResponseVM<NoContentVM>, short)> UpdateCategoryAsync(CategoryUpdateVM updatedCategory, HttpClient myClient)
         {
-            var responseCategoryUpdate = await _httpClient.PutAsJsonAsync("Category", updatedCategory);
-            var contentCategoryUpdate = await responseCategoryUpdate.Content.ReadAsStringAsync();
-            if (!responseCategoryUpdate.IsSuccessStatusCode)
-            {
-                var errorList = JsonConvert.DeserializeObject<CustomResponseVM<NoContentVM>>(contentCategoryUpdate);
-                return (errorList, false);
-            }
-            return (null, true)!;
+           
+            var rowVersionBase64 = Convert.ToBase64String(updatedCategory.RowVersion);
 
+            var newContent = new MultipartFormDataContent();
+
+            newContent.Add(new StringContent(updatedCategory.Id.ToString() ?? string.Empty),"Id");
+            newContent.Add(new StringContent(updatedCategory.Name ?? string.Empty),"Name");
+            newContent.Add(new StringContent(rowVersionBase64 ?? string.Empty), "RowVersion");
+
+            var response = await myClient.PutAsync("Category", newContent);
+            var responseContent = JsonConvert.DeserializeObject<CustomResponseVM<NoContentVM>>(await response.Content.ReadAsStringAsync());
+            var statusCode = Convert.ToInt16(response.StatusCode);     
+            
+            return (responseContent, statusCode);
         }
 
-        public async Task<CustomResponseVM<CategoryAddVM>> AddCategoryAsync(CategoryAddVM newCategory)
+        public async Task<(CustomResponseVM<CategoryAddVM>,short)> AddCategoryAsync(CategoryAddVM newCategory, HttpClient myClient)
         {
-            var responseCategoryAdd = await _httpClient.PostAsJsonAsync("Category", newCategory);
-            var contentCategoryAdd = await responseCategoryAdd.Content.ReadAsStringAsync();
-
-            if (!responseCategoryAdd.IsSuccessStatusCode)
-            {
-                var errorList = JsonConvert.DeserializeObject<CustomResponseVM<CategoryAddVM>>(contentCategoryAdd);
-                return errorList;
-            }
-
-            var success = JsonConvert.DeserializeObject<CustomResponseVM<CategoryAddVM>>(contentCategoryAdd);
-            return success;
+            var response = await myClient.PostAsJsonAsync("Category", newCategory);
+            var contentResponse = JsonConvert.DeserializeObject<CustomResponseVM<CategoryAddVM>>(await response.Content.ReadAsStringAsync());
+            var statusCode = Convert.ToInt16(response.StatusCode);  
+            return (contentResponse, statusCode);
         }
 
-        public async Task<(CustomResponseVM<NoContentVM>, bool)> DeleteCategoryAsync(int id)
+        public async Task<(CustomResponseVM<NoContentVM>, short)> DeleteCategoryAsync(int id, HttpClient myClient)
         {
-            var responseCategoryDelete = await _httpClient.DeleteAsync($"category/{id}");
-            var contentCategoryDelete = await responseCategoryDelete.Content.ReadAsStringAsync();
-            if (!responseCategoryDelete.IsSuccessStatusCode)
-            {
-                var errorList = JsonConvert.DeserializeObject<CustomResponseVM<NoContentVM>>(contentCategoryDelete);
-                return (errorList, false);
-            }
-            return (null, true)!;
+            var response = await myClient.DeleteAsync($"category/{id}");
+            var contentResponse = JsonConvert.DeserializeObject<CustomResponseVM<NoContentVM>>(await response.Content.ReadAsStringAsync());
+            var statusCode = Convert.ToInt16(response.StatusCode);
+            return (contentResponse, statusCode);
 
         }
     }

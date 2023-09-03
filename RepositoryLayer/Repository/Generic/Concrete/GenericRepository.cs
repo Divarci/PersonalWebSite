@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace RepositoryLayer.Repository.Generic.Concrete
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity, new()
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, new()
     {
         //Dependancy Injections
         protected readonly AppDbContext _context;

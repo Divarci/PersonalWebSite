@@ -1,4 +1,5 @@
-﻿using EntityLayer.WebApplication.ViewModels.MessageViewModel;
+﻿using CoreLayer.Errors;
+using EntityLayer.WebApplication.ViewModels.MessageViewModel;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
@@ -55,7 +56,8 @@ namespace PortfolioWithBlog.Controllers
         }
         public IActionResult GeneralException()
         {
-            return View();
+            var error = HttpContext.Items["Error"] as ErrorVM;
+            return View(error);
         }
     }
 }

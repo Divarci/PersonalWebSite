@@ -1,0 +1,17 @@
+﻿@model ErrorVM
+
+@{
+    ViewData["Title"] = "Error";
+    Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1>@Model.StatusCode</h1>
+@foreach (var item in Model.Error)
+{
+    <h1>@item</h1>
+}
+
+
+
+

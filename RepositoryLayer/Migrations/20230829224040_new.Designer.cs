@@ -12,8 +12,8 @@ using RepositoryLayer.Context;
 namespace RepositoryLayer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230812200909_teast66")]
-    partial class teast66
+    [Migration("20230829224040_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,41 @@ namespace RepositoryLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("EntityLayer.AuthServer.Entities.AccessToken", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AuthAccessToken");
+                });
+
+            modelBuilder.Entity("EntityLayer.AuthServer.Entities.RefreshToken", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AuthRefreshToken");
+                });
 
             modelBuilder.Entity("EntityLayer.Identity.Entities.AppRole", b =>
                 {
@@ -198,7 +233,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "As a recent graduate in architecture with a passion for technology, I am excited to begin a new journey in the field of coding. Despite my lack of professional experience in this field, I am highly motivated and eager to learn and grow.I am committed to dedicating myself to studying coding concepts, practicing my skills, and seeking out opportunities to apply my knowledge to real-world projects. My background in architecture has equipped me with valuable skills such as creativity, problem-solving, and attention to detail, which I believe will be invaluable in my pursuit of a career in coding. My eagerness to learn and my passion for coding are what drive me. I am always eager to take on new challenges and to push myself to the limit in order to achieve my goals. Through my dedication and hard work, I am confident that I can make a meaningful contribution to any team or project that I am a part of.",
                             FileName = "Add Picture",
                             FileType = "Add Picture",
@@ -210,7 +245,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "As a recent graduate in architecture with a passion for technology, I am excited to begin a new journey in the field of coding. Despite my lack of professional experience in this field, I am highly motivated and eager to learn and grow.I am committed to dedicating myself to studying coding concepts, practicing my skills, and seeking out opportunities to apply my knowledge to real-world projects. My background in architecture has equipped me with valuable skills such as creativity, problem-solving, and attention to detail, which I believe will be invaluable in my pursuit of a career in coding. My eagerness to learn and my passion for coding are what drive me. I am always eager to take on new challenges and to push myself to the limit in order to achieve my goals. Through my dedication and hard work, I am confident that I can make a meaningful contribution to any team or project that I am a part of.",
                             FileName = "Add Picture",
                             FileType = "Add Picture",
@@ -288,7 +323,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "February 2023",
                             IsEdited = false,
                             IsPublished = true,
@@ -300,7 +335,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "March 2023",
                             IsEdited = false,
                             IsPublished = true,
@@ -312,7 +347,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "April 2023",
                             IsEdited = true,
                             IsPublished = false,
@@ -324,7 +359,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "May 2023",
                             IsEdited = true,
                             IsPublished = false,
@@ -393,7 +428,7 @@ namespace RepositoryLayer.Migrations
                             Id = 1,
                             AboutMeId = 1,
                             Address = "20 Cosmopolitan Court, 67 Main Avenue, Enfield, EN1 1GD",
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Email = "hasan@gmail.com",
                             LocationUrl = "1",
                             Phone = "0785463212540"
@@ -403,7 +438,7 @@ namespace RepositoryLayer.Migrations
                             Id = 2,
                             AboutMeId = 2,
                             Address = "44 Dowsett Road, Manchester, N17 9DD",
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Email = "hasan@gmail.com",
                             LocationUrl = "2",
                             Phone = "0785463212540"
@@ -477,7 +512,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "2005 - 2010",
                             IsEdited = false,
                             IsPublished = true,
@@ -489,7 +524,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "2001 - 2005",
                             IsEdited = false,
                             IsPublished = true,
@@ -501,7 +536,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "2005 - 2010",
                             IsEdited = true,
                             IsPublished = false,
@@ -513,7 +548,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "2001 - 2005",
                             IsEdited = true,
                             IsPublished = false,
@@ -591,7 +626,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "February 2023 - Present",
                             IsEdited = false,
                             IsPublished = true,
@@ -603,7 +638,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "April 2019 - Present",
                             IsEdited = false,
                             IsPublished = true,
@@ -615,7 +650,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "July 2011 - April 2019",
                             IsEdited = true,
                             IsPublished = false,
@@ -627,7 +662,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Date = "June 2010 - June 2011",
                             IsEdited = true,
                             IsPublished = false,
@@ -694,7 +729,7 @@ namespace RepositoryLayer.Migrations
                             AboutMeId = 1,
                             Certificate = 8,
                             CodingLanguage = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             DaysOfStudy = 180,
                             Project = 12
                         },
@@ -704,7 +739,7 @@ namespace RepositoryLayer.Migrations
                             AboutMeId = 2,
                             Certificate = 10,
                             CodingLanguage = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             DaysOfStudy = 120,
                             Project = 15
                         });
@@ -783,7 +818,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "As a recent graduate in architecture with a passion for technology, I am excited to begin a new journey in the field of coding. Despite my lack of professional experience in this field.",
                             FullName = "Hasan Divarci",
                             IsEdited = false,
@@ -796,7 +831,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "As a recent graduate in architecture with a passion for technology, I am excited to begin a new journey in the field of coding. Despite my lack of professional experience in this field.",
                             FullName = "Hasan Divarci",
                             IsEdited = true,
@@ -867,7 +902,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "Welcome to the My Study Projects category. ",
                             Email = "adanali@adamlar.geldi",
                             IsEdited = false,
@@ -878,7 +913,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "Welcome to the My Study Projects category2. ",
                             Email = "mallar@adamlar.geldi",
                             IsEdited = false,
@@ -889,7 +924,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "Welcome to the My Study Projects category3. ",
                             Email = "antalyali@adamlar.geldi",
                             IsEdited = false,
@@ -900,7 +935,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "Welcome to the My Study Projects category4. ",
                             Email = "bursali@adamlar.geldi",
                             IsEdited = false,
@@ -908,6 +943,54 @@ namespace RepositoryLayer.Migrations
                             Sender = "Veli Canatan",
                             Subject = "Deneme Mesaji 4"
                         });
+                });
+
+            modelBuilder.Entity("EntityLayer.WebApplication.Entities.NewsFeed", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("CreatedDate")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2500)
+                        .HasColumnType("nvarchar(2500)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UpdatedDate")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsFeeds");
                 });
 
             modelBuilder.Entity("EntityLayer.WebApplication.Entities.Project", b =>
@@ -961,7 +1044,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "I'm excited to share details about my new project, which played a pivotal role in advancing my C# skills. This project had a strong emphasis on developing dynamic buttons with assigned dynamic missions, all accomplished through the implementation of complex algorithms. By implementing these complex algorithms, I not only expanded my knowledge of algorithmic concepts but also strengthened my problem-solving abilities. I gained valuable experience in analyzing complex problems, devising efficient solutions, and translating them into clean and well-structured code. This project served as a significant milestone in my C# journey, allowing me to consolidate my skills, broaden my horizons, and tackle more intricate programming challenges. I am proud of the achievements and growth I attained throughout this project, and I eagerly look forward to utilizing the knowledge and experiences gained to create innovative solutions in future endeavors. I'm excited about the opportunities that lie ahead and can't wait to continue expanding my expertise in C# and tackling even more advanced projects.",
                             ProjectCategoryId = 1,
                             ProjectDate = "2022 June",
@@ -970,7 +1053,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "I am thrilled to share the details of my new project, which represents a significant milestone in my journey as a developer. Building upon the foundational skills I acquired in my first project, I dedicated this endeavor to two key areas: database connections and C# algorithms. In this project, I focused on establishing connections to databases, leveraging the capabilities of SQL and database query languages to interact with data effectively. I invested time and effort in learning about database design, normalization, and the principles of relational databases. I grasped concepts such as tables, primary keys, foreign keys, and relationships, which enabled me to design efficient and well-structured database schemas. Using C#, I honed my skills in implementing database connectivity through frameworks or libraries such as ADO.NET or Entity Framework. I gained proficiency in executing SQL queries, retrieving and manipulating data, and handling transactions to ensure data integrity. I am proud of the progress I made during this project, and I am excited to continue expanding my skills in database management, algorithmic problem-solving, and other facets of software development in future endeavors.",
                             ProjectCategoryId = 1,
                             ProjectDate = "2022 July",
@@ -979,7 +1062,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "I'm thrilled to share details about my latest project, a potential professional endeavor, developed using ASP.NET Core 6 MVC. This project represents a significant milestone in my journey as a developer, as it showcases my ability to apply solid disciplines, design patterns, clean code rules, and utilize various libraries and features. Throughout the development process, I prioritized adhering to solid disciplines. By applying this principle, I ensured a well-structured and maintainable codebase, enabling future modifications and enhancements with ease. In pursuit of clean code, I followed established coding conventions and guidelines, emphasizing readability, maintainability, and self-documentation. I employed meaningful naming conventions, utilized appropriate code comments, and organized the codebase logically to enhance collaboration and understandability. To handle user authentication and authorization, I leveraged identity libraries provided by ASP.NET Core, ensuring secure access control and user management. I implemented notification mechanisms to keep users informed about relevant updates, ensuring an engaging and interactive experience. With ASP.NET Core 6 MVC , I am confident in my ability to create innovative, scalable solutions that meet the evolving needs of the industry.",
                             ProjectCategoryId = 2,
                             ProjectDate = "2022 May",
@@ -988,7 +1071,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "I'm thrilled to share details about my latest project, a potential professional endeavor, developed using ASP.NET Core 6 MVC. This project represents a significant milestone in my journey as a developer, as it showcases my ability to apply solid disciplines, design patterns, clean code rules, and utilize various libraries and features. Throughout the development process, I prioritized adhering to solid disciplines. By applying this principle, I ensured a well-structured and maintainable codebase, enabling future modifications and enhancements with ease. In pursuit of clean code, I followed established coding conventions and guidelines, emphasizing readability, maintainability, and self-documentation. I employed meaningful naming conventions, utilized appropriate code comments, and organized the codebase logically to enhance collaboration and understandability. To handle user authentication and authorization, I leveraged identity libraries provided by ASP.NET Core, ensuring secure access control and user management. I implemented notification mechanisms to keep users informed about relevant updates, ensuring an engaging and interactive experience. With ASP.NET Core 6 MVC , I am confident in my ability to create innovative, scalable solutions that meet the evolving needs of the industry.",
                             ProjectCategoryId = 2,
                             ProjectDate = "2022 April",
@@ -1054,7 +1137,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "Welcome to the My Study Projects category. ",
                             IsEdited = false,
                             IsPublished = true,
@@ -1064,7 +1147,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "Welcome to the Real-World Projects category, where I present a series of practical.",
                             IsEdited = true,
                             IsPublished = false,
@@ -1119,7 +1202,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 1
@@ -1127,7 +1210,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 1
@@ -1135,7 +1218,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 2
@@ -1143,7 +1226,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 2
@@ -1151,7 +1234,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 3
@@ -1159,7 +1242,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 3
@@ -1167,7 +1250,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 4
@@ -1175,7 +1258,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             FileName = "Add New File",
                             FileType = "Add New File",
                             ProjectId = 4
@@ -1242,7 +1325,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "This is the best resume for now. Continue to use it.",
                             IsDeleted = false,
                             IsEdited = false,
@@ -1252,7 +1335,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             Description = "This is prepared for after ILR. Do not use this for now.",
                             IsDeleted = false,
                             IsEdited = true,
@@ -1318,7 +1401,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             IsEdited = false,
                             IsPublished = true,
                             ResumeId = 1,
@@ -1328,7 +1411,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             IsEdited = false,
                             IsPublished = true,
                             ResumeId = 1,
@@ -1338,7 +1421,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             IsEdited = true,
                             IsPublished = false,
                             ResumeId = 2,
@@ -1348,7 +1431,7 @@ namespace RepositoryLayer.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             IsEdited = true,
                             IsPublished = false,
                             ResumeId = 2,
@@ -1411,7 +1494,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 1,
                             AboutMeId = 1,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             GitHub = "https://github.com/",
                             LinkedIn = "https://linkdin.com/",
                             Twitter = "https://twitter.com/",
@@ -1421,7 +1504,7 @@ namespace RepositoryLayer.Migrations
                         {
                             Id = 2,
                             AboutMeId = 2,
-                            CreatedDate = "12/08/2023",
+                            CreatedDate = "29/08/2023",
                             GitHub = "https://github.com/",
                             LinkedIn = "https://linkdin.com/",
                             Twitter = "https://twitter.com/",

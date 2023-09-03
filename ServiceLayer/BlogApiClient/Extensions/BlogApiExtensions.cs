@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
 
 namespace ServiceLayer.BlogApiClient.Extensions
@@ -12,9 +13,17 @@ namespace ServiceLayer.BlogApiClient.Extensions
             services.AddScoped<CategoryServiceApi>();
 
 
+            services.AddScoped(typeof(RequestToApi));
+
+            //services.AddHttpClient();
+
             var baseUrl = config["BaseUrl"];
 
             services.AddHttpClient<ArticleServiceApi>(opt =>
+            {
+                opt.BaseAddress = new Uri(baseUrl);
+            });
+            services.AddHttpClient<RequestToApi>(opt =>
             {
                 opt.BaseAddress = new Uri(baseUrl);
             });

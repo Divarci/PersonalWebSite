@@ -1,6 +1,6 @@
 ﻿@model List<ArticleListVM>
 @{
-    ViewData["Title"] = "ArticleList";
+    ViewData["Title"] = "List";
     Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
 }
 
@@ -16,6 +16,7 @@
 
     <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Article" asp-action="ArticleUpdate" asp-route-Id="@item.Id" class=" btn btn-outline-primary">upate</a>
     <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Article" asp-action="ArticleDelete" asp-route-Id="@item.Id" class=" btn btn-outline-primary">delete</a>
+    <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Article" asp-action="ArticleAdd" asp-route-Id="@item.Id" class=" btn btn-outline-primary">Insert</a>
 
 }
 
