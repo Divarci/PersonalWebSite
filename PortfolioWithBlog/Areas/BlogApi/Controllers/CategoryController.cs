@@ -1,8 +1,11 @@
-﻿using CoreLayer.Enums;
+﻿using AutoMapper.Execution;
+using CoreLayer.Enums;
 using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
+using System.Data;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
@@ -15,13 +18,15 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
         {
             _categoryServiceApi = categoryServiceApi;
         }
-     
+
+        [Authorize(Roles = "Member,SuperAdmin")]
         public async Task<IActionResult> List()
         {
             var response = await _categoryServiceApi.GetCategoryListAsync();
             return HandleResponse(response, BlogCrudType.Select);
         }
 
+        [Authorize(Roles = "Member,SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> CategoryUpdate(int id)
@@ -31,6 +36,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Select);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> CategoryUpdate(CategoryUpdateVM updatedCategory)
@@ -40,6 +46,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Update);
         }
 
+        [Authorize(Roles = "Member, SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public IActionResult CategoryAdd()
@@ -47,6 +54,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return View();
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> CategoryAdd(CategoryAddVM newcategory)
@@ -56,6 +64,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Create);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         public async Task<IActionResult> CategoryDelete(int id)
         {

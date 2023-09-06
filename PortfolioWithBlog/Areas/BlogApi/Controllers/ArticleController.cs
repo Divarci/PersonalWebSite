@@ -1,11 +1,13 @@
 ﻿using CoreLayer.Enums;
 using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
+    
     [Area("BlogApi")]
     public class ArticleController : _BaseController<ArticleController>
     {
@@ -17,12 +19,14 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 
         }
 
+        [Authorize(Roles = "Member,SuperAdmin")]
         public async Task<IActionResult> List()
         {
             var response = await _articleServiceApi.GetAllArticleAsync();
             return HandleResponse(response, BlogCrudType.Select);
         }
 
+        [Authorize(Roles = "Member,SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> ArticleUpdate(int id)
@@ -32,6 +36,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Select);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> ArticleUpdate(ArticleUpdateVM updatedArticle)
@@ -41,6 +46,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Update);
         }
 
+        [Authorize(Roles = "Member,SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> ArticleAdd()
@@ -50,6 +56,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return View(new ArticleAddVM { Categories = categories });
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> ArticleAdd(ArticleAddVM newArticle)
@@ -59,6 +66,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Create);
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         public async Task<IActionResult> ArticleDelete(int id)
         {
