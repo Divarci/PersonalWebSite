@@ -6,7 +6,6 @@ using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
-    [ServiceFilter(typeof(RequestToApi))]
     [Area("BlogApi")]
     public class CategoryController : _BaseController<CategoryController>
     {
@@ -19,10 +18,11 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
      
         public async Task<IActionResult> List()
         {
-            var myClient = HttpContext.Items["Token"] as HttpClient;
-            var response = await _categoryServiceApi.GetCategoryListAsync(myClient!);
+            var response = await _categoryServiceApi.GetCategoryListAsync();
             return HandleResponse(response, BlogCrudType.Select);
         }
+
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> CategoryUpdate(int id)
         {
@@ -31,6 +31,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Select);
         }
 
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> CategoryUpdate(CategoryUpdateVM updatedCategory)
         {
@@ -39,12 +40,14 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Update);
         }
 
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public IActionResult CategoryAdd()
         {
             return View();
         }
 
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> CategoryAdd(CategoryAddVM newcategory)
         {
@@ -53,6 +56,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Create);
         }
 
+        [ServiceFilter(typeof(RequestToApi))]
         public async Task<IActionResult> CategoryDelete(int id)
         {
             var myClient = HttpContext.Items["Token"] as HttpClient;

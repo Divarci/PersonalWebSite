@@ -14,7 +14,7 @@
             <ul>
                 <li><a class="active " asp-controller="Home" asp-action="Index">Home</a></li>
                 <li><a href="#AboutMe">About</a></li>
-                <li><a href="#Projects">Portfolio</a></li>
+                <li><a href="#Projects">Portfolio</a></li>               
                 <li><a href="#Contact">Contact Me</a></li>
 
                 @if (User.Identity.IsAuthenticated)
@@ -46,11 +46,11 @@
 
                     <p>@item.Description</p>
                     <a href="~/images/@item.ResumeCvFileName" alt="Resume" download="~/images/@item.ResumeCvFileName" class="btn-get-started ">Download CV</a>
-                    <a href="@item.VideoUrl" class="btn-get-started-new ">Watch Me</a>
+                    <a asp-controller="BlogApi" asp-action="Index" class="btn-get-started-new ">Browse Me</a>
                     <div class="social">
                         @if (!string.IsNullOrEmpty(@item.SocialMediaListVM.Twitter))
                         {
-                            <a href=""><i class="bi bi-twitter">@item.SocialMediaListVM.Twitter</i></a>
+                            <a href="@item.SocialMediaListVM.Twitter"><i class="bi bi-twitter"></i></a>
                         }
                         @if (!string.IsNullOrEmpty(@item.SocialMediaListVM.Youtube))
                         {

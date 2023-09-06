@@ -1,10 +1,14 @@
-﻿using EntityLayer.Identity.Entities;
+﻿using EntityLayer.AuthServer.Entities;
+using EntityLayer.Identity.Entities;
 using EntityLayer.Identity.ViewModes;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using NToastNotify;
+using RepositoryLayer.UnitOfWorks.Abstract;
 using ServiceLayer._SharedFolder.Helpers.ModalStateHelper;
 using ServiceLayer._SharedFolder.Messages.ToastyNotification;
 using ServiceLayer.AuthServer.Services.Abstract;
@@ -24,9 +28,12 @@ namespace PortfolioWithBlog.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenAuthenticationService _tokenService;
+        private readonly IMemoryCache _cache;
+        private const string TokenKey = "Token";
+        private readonly IUnitOfWork _unitOfWork;
 
 
-        public AuthenticationController(ICustomAuthenticationService authentication, IToastNotification toasty, IIdentityMessages messages, IValidator<SignUpVM> validatorSignUp, IValidator<SignInVM> validatorSignIn, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IValidator<ForgotPasswordVM> validatorForgot, IValidator<ResetPasswordVM> validatorReset, ITokenAuthenticationService tokenService)
+        public AuthenticationController(ICustomAuthenticationService authentication, IToastNotification toasty, IIdentityMessages messages, IValidator<SignUpVM> validatorSignUp, IValidator<SignInVM> validatorSignIn, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IValidator<ForgotPasswordVM> validatorForgot, IValidator<ResetPasswordVM> validatorReset, ITokenAuthenticationService tokenService, IMemoryCache cache, IUnitOfWork unitOfWork)
         {
             _authentication = authentication;
             _toasty = toasty;
@@ -38,6 +45,8 @@ namespace PortfolioWithBlog.Controllers
             _validatorForgot = validatorForgot;
             _validatorReset = validatorReset;
             _tokenService = tokenService;
+            _cache = cache;
+            _unitOfWork = unitOfWork;
         }
 
 
@@ -82,6 +91,8 @@ namespace PortfolioWithBlog.Controllers
             if (signInResult.Succeeded)
             {
                 await _tokenService.CreateTokenAsync(hasUser);
+                _cache.Set(TokenKey, await _unitOfWork.GetGenericRepository<AccessToken>().Where(x => x.UserId == hasUser.Id).SingleAsync());
+
                 _toasty.AddSuccessToastMessage(_messages.SuccessfulLogin(hasUser.UserName), new ToastrOptions { Title = "Welcome" });
                 return Redirect(returnUrl!);
             }

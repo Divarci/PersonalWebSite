@@ -6,7 +6,6 @@ using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
-    [ServiceFilter(typeof(RequestToApi))]
     [Area("BlogApi")]
     public class ArticleController : _BaseController<ArticleController>
     {
@@ -20,11 +19,11 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 
         public async Task<IActionResult> List()
         {
-            var myClient = HttpContext.Items["Token"] as HttpClient;
-            var response = await _articleServiceApi.GetAllArticleAsync(myClient!);
+            var response = await _articleServiceApi.GetAllArticleAsync();
             return HandleResponse(response, BlogCrudType.Select);
         }
 
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> ArticleUpdate(int id)
         {
@@ -32,6 +31,8 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             var response = await _articleServiceApi.GetArticleByIdAsync(id, myClient!);
             return HandleResponse(response, BlogCrudType.Select);
         }
+
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> ArticleUpdate(ArticleUpdateVM updatedArticle)
         {
@@ -40,6 +41,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Update);
         }
 
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> ArticleAdd()
         {
@@ -47,6 +49,8 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             var categories = await _articleServiceApi.GetCategoriesForDropDown(myClient!);
             return View(new ArticleAddVM { Categories = categories });
         }
+
+        [ServiceFilter(typeof(RequestToApi))]
         [HttpPost]
         public async Task<IActionResult> ArticleAdd(ArticleAddVM newArticle)
         {
@@ -55,12 +59,17 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Create);
         }
 
+        [ServiceFilter(typeof(RequestToApi))]
         public async Task<IActionResult> ArticleDelete(int id)
         {
             var myClient = HttpContext.Items["Token"] as HttpClient;
             var response = await _articleServiceApi.DeleteArticleAsync(id, myClient!);
             return HandleResponse(response, BlogCrudType.Delete);
         }
-    }
 
+       
+
+    }
 }
+
+

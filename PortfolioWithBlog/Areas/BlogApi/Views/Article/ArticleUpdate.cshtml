@@ -4,35 +4,48 @@
     Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ArticleUpdate</h1>
+<h1>
+    <div class="pagetitle">
+        <div class="pagetitle" style="display: flex; align-items: center;">
+            <h1>Update Article</h1>
+        </div><!-- End Page Title -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="BlogApi" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Update Article</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+</h1>
 
 <form asp-area="BlogAPi" asp-controller="Article" asp-action="ArticleUpdate" method="post" class="row g-12" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="RowVersion" />    
     <div asp-validation-summary="ModelOnly"></div>
 
-    <div class="col-12">
+    <div class="col-md-6">
         <label asp-for="Title" class="form-label"></label>
         <input asp-for="Title" type="text" class="form-control">
         <span asp-validation-for="Title" class="text-danger"></span>
 
     </div>
-    <div class="col-6">
-        <label asp-for="Content" class="form-label"></label>
-        <input asp-for="Content" type="text" class="form-control">
-        <span asp-validation-for="Content" class="text-danger"></span>
-    </div>
-    <div class="col-6">
-        <label asp-for="Author" class="form-label"></label>
-        <input asp-for="Author" type="text" class="form-control">
-        <span asp-validation-for="Author" class="text-danger"></span>
-    </div>
-    <div class="col-12">
+    <div class="col-md-6">
         <label asp-for="CategoryId" class="form-label"></label>
         <select asp-for="CategoryId" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-control"></select>
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
     <div class="col-12">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea style="height: 300px" asp-for="Content" type="text" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="col-md-6">
+        <label asp-for="Author" class="form-label"></label>
+        <input asp-for="Author" type="text" class="form-control">
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
         <label asp-for="Photo" class="form-label"></label>
         <input asp-for="Photo" type="file" accept="image/*" class="form-control">
         <span asp-validation-for="Photo" class="text-danger"></span>

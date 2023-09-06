@@ -31,7 +31,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.UseStatusCodePagesWithReExecute("/Home/PageNotFound");
 //app.UseExceptionHandler("/Home/GeneralException");
-app.UseMiddleware<ExceptionHandlerWithLogging>();
+//app.UseMiddleware<ExceptionHandlerWithLogging>();
 
 
 app.UseHttpsRedirection();

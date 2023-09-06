@@ -1,20 +1,9 @@
 ﻿using CoreLayer.ResponseModel;
-using EntityLayer.AuthServer.Entities;
 using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
 using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
-using EntityLayer.Identity.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Forms;
 using Newtonsoft.Json;
-using RepositoryLayer.UnitOfWorks.Abstract;
 using ServiceLayer.BlogApiClient.Exceptions;
-using ServiceLayer.BlogApiClient.Helpers;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text;
 
 namespace ServiceLayer.BlogApiClient.Services
 {
@@ -27,13 +16,25 @@ namespace ServiceLayer.BlogApiClient.Services
             _httpClient = httpClient;
         }
 
-        public async Task<(CustomResponseVM<List<ArticleListVM>>, short)> GetAllArticleAsync(HttpClient myClient)
+        public async Task<(CustomResponseVM<List<ArticleListVM>>, short)> GetAllArticleAsync()
         {
-            var response = await myClient.GetAsync("Article");
+            var response = await _httpClient.GetAsync("Article");
             var content = JsonConvert.DeserializeObject<CustomResponseVM<List<ArticleListVM>>>(await response.Content.ReadAsStringAsync());
             var statusCode = Convert.ToInt16(response.StatusCode);
-
             return (content, statusCode);
+
+        }
+
+        public async Task<(CustomResponseVM<List<ArticleListVM>>, short)> GetAllArticleForDashboardAsync()
+        {
+            var articleList = await GetAllArticleAsync();
+            if (articleList.Item1.Data != null)
+            {
+                var content = articleList.Item1.Data.Take(6).OrderByDescending(x => x.CreatedDate).ToList();
+                articleList.Item1.Data = content;
+            }
+            var statusCode = articleList.Item2;
+            return (articleList.Item1, statusCode);
 
         }
 
@@ -166,6 +167,32 @@ namespace ServiceLayer.BlogApiClient.Services
 
             return (responseContent, statusCode);
         }
+
+        // Article For Web Site
+
+        public async Task<(CustomResponseVM<List<ArticleListVM>>, short,int)> ArticlePaginationAsync(short page)
+        {
+            var articleList = await GetAllArticleAsync();
+            var articleCount = articleList.Item1.Data.Count;
+
+            int pages =articleCount /4;
+            var mod = articleCount % 4;
+            if(mod > 0)
+            {
+                pages++;
+            }
+
+            if (articleList.Item1.Data != null)
+            {
+                var content = articleList.Item1.Data.OrderByDescending(x => x.CreatedDate).Skip((page-1)*4).Take(4).ToList();
+                articleList.Item1.Data = content;
+            }
+            var statusCode = articleList.Item2;
+            return (articleList.Item1, statusCode, pages);
+        }
+
+
+
     }
 }
 

@@ -1,8 +1,21 @@
-﻿
+﻿@model List<ArticleListVM>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
 }
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 d-flex align-content-stretch">
+            <div class="card ">
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.FileByte)" alt="@item.Title" />
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title / @item.Category.Name</h5>
+                    <p class="card-text">@item.Content</p>
+                    <h5 class="card-footer ">@item.Author / @item.CreatedDate</h5>
 
-<h1>Index</h1>
-
+                </div>
+            </div>
+        </div>
+    }
+</div>

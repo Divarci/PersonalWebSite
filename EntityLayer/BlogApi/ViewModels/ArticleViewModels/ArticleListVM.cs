@@ -18,6 +18,8 @@ namespace EntityLayer.BlogApi.ViewModels.ArticleViewModels
 
         //Picture Section
         public string FileName { get; set; } = null!;
+        public byte[] FileByte { get; set; } = null!;
+        public string FileType { get; set; } = null!;
 
         //category relation
         public CategoryListVM Category { get; set; } = null!;

@@ -18,10 +18,10 @@ namespace ServiceLayer.BlogApiClient.Services
            
         }
 
-        public async Task<(CustomResponseVM<List<CategoryListVM>>,short)> GetCategoryListAsync(HttpClient myClient)
+        public async Task<(CustomResponseVM<List<CategoryListVM>>,short)> GetCategoryListAsync()
         {
 
-            var response = await myClient.GetAsync("Category");
+            var response = await _httpClient.GetAsync("Category");
             var contentCategoryList = JsonConvert.DeserializeObject<CustomResponseVM<List<CategoryListVM>>>(await response.Content.ReadAsStringAsync());
             var statusCode = Convert.ToInt16(response.StatusCode);
             return (contentCategoryList, statusCode);

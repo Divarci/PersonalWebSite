@@ -4,18 +4,74 @@
     Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CategoryList</h1>
+<body>
+    <div class="pagetitle">
+        <div class="pagetitle" style="display: flex; align-items: center;">
+            <h1>Categories</h1>
+        </div><!-- End Page Title -->
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-area="BlogApi" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+                <li class="breadcrumb-item active">Categories</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <div class="card-body">
 
-@foreach (var item in Model)
-{
-    <h1>@item.Name</h1>
-    <h1>@item.CreatedDate</h1>
-    <h1>@item.UpdatedDate</h1>
+        <!-- Table with hoverable rows -->
+        <table class="table table-hover">
+            <thead>
+                <tr>                    
+                    <th style="width:70%" scope="col">TITLE</th>
+                    <th style="width:10%" scope="col">CR.DT.</th>
+                    <th style="width:10%" scope="col">UP.DT.</th>
+                    <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-edit-2-line"></i> </a> </th>
+                    <th style="width:5%" scope="col"><a class="btn btn-secondary"><i class="ri-delete-bin-6-line"></i></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="width:70%">@item.Name</td>
+                        <td style="width:10%">@item.CreatedDate</td>
+                        <td style="width:10%">@item.UpdatedDate</td>
+                        <td style="width:55%"><a data-id="@item.Id" asp-area="BlogApi" asp-controller="Category" asp-action="CategoryUpdate" class="btn btn-outline-primary" asp-route-Id="@item.Id"> <i class="ri-edit-2-line"></i></a> </td>
+
+                        <td style="width:5%">
+                            <a class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteconfirmation-@item.Id"><i class="ri-delete-bin-6-line"></i></a>
+
+                            <div class="modal fade" id="deleteconfirmation-@item.Id" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">WARNING!!</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            You are about to delete this data. Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Category" asp-action="CategoryDelete" class="btn btn-outline-danger" asp-route-Id="@item.Id">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <a asp-area="BlogApi" asp-controller="Category" asp-action="CategoryAdd" class="btn btn-success">NEW CATEGORY</a>
+
+</body>
 
 
-    <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Category" asp-action="CategoryUpdate" asp-route-Id="@item.Id" class=" btn btn-outline-primary">upate</a>
-    <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Category" asp-action="CategoryDelete" asp-route-Id="@item.Id" class=" btn btn-outline-primary">delete</a>
-    <a data-id="@item.Id" asp-area="BlogApi" asp-controller="Category" asp-action="CategoryAdd" asp-route-Id="@item.Id" class=" btn btn-outline-primary">Insert</a>
-
-}
 

@@ -19,7 +19,7 @@ namespace PortfolioWithBlog.Controllers
         }
 
 
-        //----------
+        //Captcha
         public IActionResult Index()
         {
             var captcha = _messageService.CaptchaGenerator();
@@ -56,8 +56,7 @@ namespace PortfolioWithBlog.Controllers
         }
         public IActionResult GeneralException()
         {
-            var error = HttpContext.Items["Error"] as ErrorVM;
-            return View(error);
+            return View();
         }
     }
 }
