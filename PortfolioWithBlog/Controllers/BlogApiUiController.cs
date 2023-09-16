@@ -1,15 +1,17 @@
 ﻿using CoreLayer.Enums;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using PortfolioWithBlog.Areas.BlogApi.Controllers;
+using ServiceLayer._SharedFolder.Messages.ToastyNotification;
 using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Controllers
 {
-    public class BlogApiController : _BaseController<CategoryController>
+    public class BlogApiUiController : _BaseController<CategoryController>
     {
         private readonly CategoryServiceApi _categoryServiceApi;
 
-        public BlogApiController(CategoryServiceApi categoryServiceApi)
+        public BlogApiUiController(CategoryServiceApi categoryServiceApi, IToastNotification toasty, IGenericMessages messages) : base(toasty, messages)
         {
             _categoryServiceApi = categoryServiceApi;
         }

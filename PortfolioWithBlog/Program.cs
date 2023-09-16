@@ -29,9 +29,9 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-app.UseStatusCodePagesWithReExecute("/Home/PageNotFound");
+//app.UseStatusCodePagesWithReExecute("/Home/PageNotFound");
 //app.UseExceptionHandler("/Home/GeneralException");
-app.UseMiddleware<ExceptionHandlerWithLogging>();
+//app.UseMiddleware<ExceptionHandlerWithLogging>();
 
 
 app.UseHttpsRedirection();
@@ -65,11 +65,12 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(
         name: "BlogApi",
         areaName: "BlogApi",
-        pattern: "BlogApi/{controller=Article}/{action=GetAllArticles}/{id?}"
+        pattern: "BlogApi/{controller=Dashboard}/{action=Index}/{id?}"
         );
     endpoints.MapControllerRoute(
-        name: "default",
+        name: "Home",
         pattern: "{controller=Home}/{action=Index}/{id?}");
+    
 });
 
 

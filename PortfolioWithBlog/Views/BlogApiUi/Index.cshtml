@@ -109,14 +109,14 @@
                     {
                         foreach (var article in categories.Articles!)
                         {
-                            <article class="entry col-md-4 portfolio-wrap filter-@article.Category.Name">
+                            <article class="entry col-lg-4 portfolio-wrap filter-@article.Category.Name">
 
                                 <div class="entry-img">
                                     <img src="data:image/jpeg;base64,@Convert.ToBase64String(article.FileByte)" alt="@article.Title" class="img-fluid">
                                 </div>
 
                                 <h2 class="entry-title">
-                                    <a href="#">@article.Title</a>
+                                    <a href="@article.YoutubeUrl">@article.Title</a>
                                 </h2>
 
                                 <div class="entry-meta">
@@ -132,7 +132,7 @@
                                         @article.Content
                                     </p>
                                     <div class="read-more">
-                                        <a href="#">Watch Series</a>
+                                        <a href="@article.YoutubeUrl">Watch Series</a>
                                     </div>
                                 </div>
 

@@ -46,7 +46,7 @@
 
                     <p>@item.Description</p>
                     <a href="~/images/@item.ResumeCvFileName" alt="Resume" download="~/images/@item.ResumeCvFileName" class="btn-get-started ">Download CV</a>
-                    <a asp-controller="BlogApi" asp-action="Index" class="btn-get-started-new ">Browse Me</a>
+                    <a asp-controller="BlogApiUi" asp-action="Index" class="btn-get-started-new ">Browse Me</a>
                     <div class="social">
                         @if (!string.IsNullOrEmpty(@item.SocialMediaListVM.Twitter))
                         {

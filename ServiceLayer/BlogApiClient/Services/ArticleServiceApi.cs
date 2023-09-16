@@ -102,6 +102,7 @@ namespace ServiceLayer.BlogApiClient.Services
                     newContent.Add(new StringContent(updatedArticle.Title ?? string.Empty), "Title");
                     newContent.Add(new StringContent(updatedArticle.Content ?? string.Empty), "Content");
                     newContent.Add(new StringContent(updatedArticle.Author ?? string.Empty), "Author");
+                    newContent.Add(new StringContent(updatedArticle.YoutubeUrl ?? string.Empty), "YoutubeUrl");
                     newContent.Add(new StringContent(updatedArticle.CategoryId.ToString() ?? string.Empty), "CategoryId");
 
                     var rowVersionBase64 = Convert.ToBase64String(updatedArticle.RowVersion);
@@ -113,6 +114,7 @@ namespace ServiceLayer.BlogApiClient.Services
                     newContent.Add(new StringContent(updatedArticle.Title ?? string.Empty), "Title");
                     newContent.Add(new StringContent(updatedArticle.Content ?? string.Empty), "Content");
                     newContent.Add(new StringContent(updatedArticle.Author ?? string.Empty), "Author");
+                    newContent.Add(new StringContent(updatedArticle.YoutubeUrl ?? string.Empty), "YoutubeUrl");
                     newContent.Add(new StringContent(updatedArticle.CategoryId.ToString() ?? string.Empty), "CategoryId");
 
                     var rowVersionBase64 = Convert.ToBase64String(updatedArticle.RowVersion);
@@ -154,6 +156,7 @@ namespace ServiceLayer.BlogApiClient.Services
                 newContent.Add(new StringContent(newArticle.Title ?? string.Empty), "Title");
                 newContent.Add(new StringContent(newArticle.Content ?? string.Empty), "Content");
                 newContent.Add(new StringContent(newArticle.Author ?? string.Empty), "Author");
+                newContent.Add(new StringContent(newArticle.YoutubeUrl ?? string.Empty), "YoutubeUrl");
                 newContent.Add(new StringContent(newArticle.CategoryId.ToString() ?? string.Empty), "CategoryId");
 
                 var photoContent = new StreamContent(newArticle.Photo.OpenReadStream());

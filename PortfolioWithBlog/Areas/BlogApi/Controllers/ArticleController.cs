@@ -2,6 +2,8 @@
 using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
+using ServiceLayer._SharedFolder.Messages.ToastyNotification;
 using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
 
@@ -13,7 +15,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
     {
         private readonly ArticleServiceApi _articleServiceApi;
 
-        public ArticleController(ArticleServiceApi articleServiceApi)
+        public ArticleController(ArticleServiceApi articleServiceApi, IToastNotification toasty, IGenericMessages messages) :base(toasty,messages)
         {
             _articleServiceApi = articleServiceApi;
 
@@ -24,7 +26,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             var response = await _articleServiceApi.GetAllArticleAsync();
             return HandleResponse(response, BlogCrudType.Select);
         }
-
+        
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> ArticleUpdate(int id)
@@ -41,7 +43,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
         {
             var myClient = HttpContext.Items["Token"] as HttpClient;
             var response = await _articleServiceApi.ArticleUpdateAsync(updatedArticle, myClient!);
-            return HandleResponse(response, BlogCrudType.Update);
+            return HandleResponse(response, BlogCrudType.Modify);
         }
 
         [ServiceFilter(typeof(RequestToApi))]

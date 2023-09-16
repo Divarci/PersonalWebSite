@@ -2,9 +2,9 @@
 {
     public enum BlogCrudType
     {
-        Delete = 204,
+        Delete = 203,
+        Modify = 204,
         Create = 201,
-        Update = 204,
         Select = 200,
         SelectSingle = 202,
         

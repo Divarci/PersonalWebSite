@@ -20,6 +20,8 @@ namespace EntityLayer.BlogApi.ViewModels.ArticleViewModels
         public string Title { get; set; } = null!;
         public string Content { get; set; } = null!;
         public string Author { get; set; } = null!;
+        public string? YoutubeUrl { get; set; }
+
 
         //Photo Add
         public IFormFile? Photo { get; set; }

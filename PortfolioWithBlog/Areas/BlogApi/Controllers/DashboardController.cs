@@ -2,6 +2,8 @@
 using CoreLayer.Errors;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
+using ServiceLayer._SharedFolder.Messages.ToastyNotification;
 using ServiceLayer.BlogApiClient.Exceptions;
 using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
@@ -14,7 +16,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
     {
         private readonly ArticleServiceApi _articleServiceApi;
 
-        public DashboardController(ArticleServiceApi articleServiceApi)
+        public DashboardController(ArticleServiceApi articleServiceApi, IToastNotification toasty, IGenericMessages messages) : base(toasty, messages)
         {
             _articleServiceApi = articleServiceApi;
         }
@@ -35,6 +37,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
                new ErrorVM { Error =new List<string> { "Permission Needed" }, StatusCode = 403 },
                new ErrorVM { Error =new List<string> { "Page Not Found" }, StatusCode = 404 },
                new ErrorVM { Error =new List<string> { "Please delete all articles related to this category!" }, StatusCode = 409 },
+               new ErrorVM { Error =new List<string> { "You do not have any category to add in!" }, StatusCode = 409 },
             };
 
 

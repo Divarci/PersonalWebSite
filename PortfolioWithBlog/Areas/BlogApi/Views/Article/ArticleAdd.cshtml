@@ -35,13 +35,17 @@
         <textarea style="height: 300px" asp-for="Content" type="text" class="form-control"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
-    <div class="col-6">
+    <div class="col-4">
         <label asp-for="Author" class="form-label"></label>
         <input asp-for="Author" type="text" class="form-control">
         <span asp-validation-for="Author" class="text-danger"></span>
     </div>
-    
-    <div class="col-6">
+    <div class="col-4">
+        <label asp-for="YoutubeUrl" class="form-label"></label>
+        <input asp-for="YoutubeUrl" type="text" class="form-control">
+        <span asp-validation-for="YoutubeUrl" class="text-danger"></span>
+    </div>
+    <div class="col-4">
         <label asp-for="Photo" class="form-label"></label>
         <input asp-for="Photo" type="file" accept="image/*" class="form-control">
         <span asp-validation-for="Photo" class="text-danger"></span>
