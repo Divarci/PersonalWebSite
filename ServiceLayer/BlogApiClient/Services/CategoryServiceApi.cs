@@ -1,10 +1,7 @@
 ﻿using CoreLayer.ResponseModel;
-using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
 using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Net.Http.Json;
-using System.Text;
 
 namespace ServiceLayer.BlogApiClient.Services
 {
@@ -67,7 +64,7 @@ namespace ServiceLayer.BlogApiClient.Services
             var contentResponse = JsonConvert.DeserializeObject<CustomResponseVM<NoContentVM>>(await response.Content.ReadAsStringAsync());
             var statusCode = Convert.ToInt16(response.StatusCode);
             return (contentResponse, statusCode);
-
         }
+                
     }
 }

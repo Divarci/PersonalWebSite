@@ -1,4 +1,4 @@
-﻿@model List<ArticleListVM>
+﻿@model List<CategoryListVM>
 
 @{
     Layout = null;
@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Software Developer</title>
+    <title>Software Developer | Blog</title>
     <meta content="Software developer website. I have qualification with ASP.NET CORE" name="description">
     <meta content="Software, Developer, Website, Microsoft, Asp.Net Core" name="keywords">
 
@@ -52,7 +52,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="active " asp-controller="Home" asp-action="Index">Home</a></li>
-                   
+
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li> <a class="text-warning" asp-area="User" asp-controller="Dashboard" asp-action="Index">@User.Identity.Name </a></li>
@@ -72,41 +72,64 @@
         </div>
     </header><!-- End Header -->
 
-  
+
 
     <main id="main">
-
         <!-- ======= Blog Section ======= -->
-        <section id="blog" class="blog">
-            <div class="container" data-aos="fade-up">
+        <section class="breadcrumbs">
+            <div class="container">
 
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Blog</h2>
+
+                </div>
+
+            </div>
+        </section><!-- End Blog Section -->
+        <!-- ======= Portfolio Section ======= -->
+        <section class="portfolio">
+            <div class="blog container">
+                <!-- ======= Category Section ======= -->
                 <div class="row">
+                    <div class="col-lg-12">
+                        <ul id="portfolio-flters">
+                            <li data-filter="*" class="filter-active">All</li>
+                            @foreach (var item in Model)
+                            {
+                                <li data-filter=".filter-@item.Name">@item.Name</li>
+                            }
 
-                   
+                        </ul>
+                    </div>
+                </div>
+                <!-- ======= Projects Section ======= -->
 
-                        @foreach (var item in Model)
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+                    @foreach (var categories in Model)
+                    {
+                        foreach (var article in categories.Articles!)
                         {
-                            <article class="entry col-md-6">
+                            <article class="entry col-md-4 portfolio-wrap filter-@article.Category.Name">
 
                                 <div class="entry-img">
-                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.FileByte)" alt="@item.Title" class="img-fluid">
+                                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(article.FileByte)" alt="@article.Title" class="img-fluid">
                                 </div>
 
                                 <h2 class="entry-title">
-                                    <a href="#">@item.Title</a>
+                                    <a href="#">@article.Title</a>
                                 </h2>
 
                                 <div class="entry-meta">
                                     <ul>
-                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>@item.Author</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i> @item.CreatedDate</li>
-                                        <li class="d-flex align-items-center"><i class="bi bi-list"></i> @item.Category.Name</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>@article.Author</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i> @article.CreatedDate</li>
+                                        <li class="d-flex align-items-center"><i class="bi bi-list"></i> @article.Category.Name</li>
                                     </ul>
                                 </div>
 
                                 <div class="entry-content">
                                     <p>
-                                        @item.Content
+                                        @article.Content
                                     </p>
                                     <div class="read-more">
                                         <a href="#">Watch Series</a>
@@ -114,31 +137,18 @@
                                 </div>
 
                             </article>
-
-                            <!-- End blog entry -->
                         }
-                       
-                        <div class="blog-pagination">
-                            <ul class="justify-content-center">
-                                
-                                
-                                @for (int i = 1; i <= ViewBag.Count; i++)
-                                {
-                                    <li ><a asp-controller="BlogApi" asp-action="Index" asp-route-page="@i">@i</a></li>
-                                }
-
-                            </ul>
-                        </div>
-
-                  
+                    }
 
                 </div>
 
             </div>
-        </section><!-- End Blog Section -->
+        </section><!-- End Portfolio Section -->
+
+
 
     </main><!-- End #main -->
-   
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
@@ -163,3 +173,66 @@
 </body>
 
 </html>
+
+
+
+
+
+@*
+
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+
+        <div class="row">
+
+
+            @foreach (var item in Model)
+            {
+                <article class="entry col-md-6">
+
+                    <div class="entry-img">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.FileByte)" alt="@item.Title" class="img-fluid">
+                    </div>
+
+                    <h2 class="entry-title">
+                        <a href="#">@item.Title</a>
+                    </h2>
+
+                    <div class="entry-meta">
+                        <ul>
+                            <li class="d-flex align-items-center"><i class="bi bi-person"></i>@item.Author</li>
+                            <li class="d-flex align-items-center"><i class="bi bi-clock"></i> @item.CreatedDate</li>
+                            <li class="d-flex align-items-center"><i class="bi bi-list"></i> @item.Category.Name</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry-content">
+                        <p>
+                            @item.Content
+                        </p>
+                        <div class="read-more">
+                            <a href="#">Watch Series</a>
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- End blog entry -->
+            }
+            <div class="blog-pagination">
+                <ul class="justify-content-center">
+
+
+                    @for (int i = 1; i <= ViewBag.Count; i++)
+                    {
+                        <li><a asp-controller="BlogApi" asp-action="Index" asp-route-page="@i">@i</a></li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section><!-- End Blog Section -->*@

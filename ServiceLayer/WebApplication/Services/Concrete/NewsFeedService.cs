@@ -133,12 +133,16 @@ namespace ServiceLayer.WebApplication.Services.Concrete
         //USER SIDE SERVICES-------------------
 
         //List method (queryable)
-        public IQueryable<NewsFeedUserListVM> GetNewsListForUserAsync()
+        public async Task<List<NewsFeedUserListVM>> GetLastFiveNewsListForUserAsync()
         {
-            var newsList = _newsFeedRepository.GetAll().ProjectTo<NewsFeedUserListVM>(_mapper.ConfigurationProvider);
-            return newsList;
-        }
-
+            var newsList = await _newsFeedRepository.GetAll().ProjectTo<NewsFeedUserListVM>(_mapper.ConfigurationProvider).ToListAsync();
+            if (newsList.Count != 0)
+            {
+                var orderedList = newsList.OrderByDescending(x => x.CreatedDate).Take(5).ToList();
+                return orderedList;
+            }
+            return newsList!;
+        }      
 
     }
 }

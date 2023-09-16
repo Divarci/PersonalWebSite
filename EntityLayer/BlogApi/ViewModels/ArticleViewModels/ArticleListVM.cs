@@ -22,7 +22,8 @@ namespace EntityLayer.BlogApi.ViewModels.ArticleViewModels
         public string FileType { get; set; } = null!;
 
         //category relation
-        public CategoryListVM Category { get; set; } = null!;
+        public int? CategoryId { get; set; }
+        public CategoryVM Category { get; set; } = null!;
 
     }
 }

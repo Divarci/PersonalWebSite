@@ -18,7 +18,7 @@ namespace PortfolioWithBlog.Areas.User.Controllers
 
         public async Task<IActionResult> Index()
         {      
-            var lastNews = await _newsFeedService.GetNewsListForUserAsync().OrderBy(x=>x.CreatedDate).LastAsync();
+            var lastNews = await _newsFeedService.GetLastFiveNewsListForUserAsync();
             return View(lastNews);
         }
     }

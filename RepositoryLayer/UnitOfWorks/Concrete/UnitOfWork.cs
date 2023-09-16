@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using RepositoryLayer.Context;
 using RepositoryLayer.Repository.Generic.Abstract;
@@ -51,6 +52,9 @@ namespace RepositoryLayer.UnitOfWorks.Concrete
                 {
                     return "Data has just been changed by another User. Please Try Again.";
                 }
+
+                if (ex.InnerException is SqlException sqlException && sqlException.Number == 547)
+                    return "Please delete all relevant datas before delete this resume!";
 
                 return ex.Message.ToString();
 

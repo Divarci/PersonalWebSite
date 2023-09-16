@@ -1,11 +1,14 @@
 ﻿using CoreLayer.Enums;
 using CoreLayer.Errors;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.BlogApiClient.Exceptions;
 using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
+    [Authorize(Policy = "AdminObserverPolicy")]
     [Area("BlogApi")]
     public class DashboardController : _BaseController<ArticleController>
     {
@@ -16,45 +19,37 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             _articleServiceApi = articleServiceApi;
         }
 
-        private (short, string) ExceptionMessageAndCodeRegenerator(List<string> message)
-        {
-            string wholeQueryString = message.FirstOrDefault()!;
-            string keyString = "?";
-            int index = wholeQueryString.IndexOf(keyString);
-            short statusCode = Convert.ToInt16(wholeQueryString.Substring(index + 1));
-            string error = wholeQueryString.Substring(0, index);
-            return (statusCode, error);
-        }
-
         public async Task<IActionResult> Index()
         {
-            var response = await _articleServiceApi.GetAllArticleForDashboardAsync();              
-            return HandleResponse(response,BlogCrudType.Select);
+            var response = await _articleServiceApi.GetAllArticleForDashboardAsync();
+            return HandleResponse(response, BlogCrudType.Select);
         }
 
         public IActionResult Error(List<string> errors, short code)
         {
-            if (code == 0)
+            List<ErrorVM> allowedErrors = new()
             {
-                var error = ExceptionMessageAndCodeRegenerator(errors);
+               new ErrorVM { Error =new List<string> { "Id is not valid." }, StatusCode = 404 },
+               new ErrorVM { Error =new List<string> { "Data is not found." }, StatusCode = 404 },
+               new ErrorVM { Error =new List<string> { "Unauthorized Access" }, StatusCode = 401 },
+               new ErrorVM { Error =new List<string> { "Permission Needed" }, StatusCode = 403 },
+               new ErrorVM { Error =new List<string> { "Page Not Found" }, StatusCode = 404 },
+               new ErrorVM { Error =new List<string> { "Please delete all articles related to this category!" }, StatusCode = 409 },
+            };
 
-                var errorList = new ErrorVM
-                {
-                    Error = new List<string> { error.Item2 },
-                    StatusCode = error.Item1
-                };
-                return View(errorList);
-            }
-            else
+
+            var incomingErrorList = new ErrorVM
             {
-                var errorList = new ErrorVM
-                {
-                    Error = errors,
-                    StatusCode = code
-                };
-                return View(errorList);
+                Error = errors,
+                StatusCode = code
+            };
+
+            if (allowedErrors.Any(x => x.Error.FirstOrDefault() == incomingErrorList.Error.FirstOrDefault() && x.StatusCode == incomingErrorList.StatusCode))
+            {
+                return View(incomingErrorList);
             }
 
+            return Redirect("/Home/PageNotFound");
 
 
         }

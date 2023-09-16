@@ -17,6 +17,6 @@ namespace ServiceLayer.WebApplication.Services.Abstract
         //USER SIDE SERVICES-------------------
 
         //Signatures for methods
-        IQueryable<NewsFeedUserListVM> GetNewsListForUserAsync();
+        Task<List<NewsFeedUserListVM>> GetLastFiveNewsListForUserAsync();
     }
 }

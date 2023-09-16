@@ -6,8 +6,8 @@
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">Welcome to User Panel (for Super Admin)</h3>
-                <h5 class="card-subtitle">Please check your messages if any user asked any permission for trials or admin page experiences.</h5>
-                
+                <h5 class="card-subtitle"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-success me-2">Admin Panel</a><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-info">Blog Panel</a></h5>
+
             </div>
         </div>
     </div>
@@ -15,15 +15,15 @@
 }
 @foreach (var item in Model)
 {
-    var claimName = item.ClaimName == "TrialExpireDate" ? "Demo Status For Apps" : "Admin Panel Observe Status";
+    var claimName = item.ClaimName == "TrialExpireDate" ? "Demo Status For Apps" : "Panel Observe Status";
     <!-- Card with titles, buttons, and links -->
-    <div class="col-12 col-xxl-6 col-md-6 d-flex align-content-stretch">
+    <div class="col-12 col-xxl-6 col-md-6 ">
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">@claimName</h3>
                 @if (DateTime.Now > Convert.ToDateTime(item.ClaimExpire))
                 {
-                    <h5 class="card-subtitle">Get in touch with me for more 6 month access</h5>
+                    <h5 class="card-subtitle">Get in touch with me for limited Admin Panel access</h5>
                 }
                 else
                 {
@@ -36,7 +36,17 @@
                 }
                 else
                 {
-                    <p class="card-text"><a class="btn btn-success">Activated</a></p>
+                    if (@item.ClaimName == "AdminObserveExpireDate")
+                    {
+                        <p class="card-text"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="btn btn-success me-2">Admin Panel</a><a asp-area="BlogApi" asp-controller="Dashboard" asp-action="Index" class="btn btn-info">Blog Panel</a></p>
+
+                    }
+                    else
+                    {
+                        <p class="card-text"><a class="btn btn-success">Activated</a></p>
+                    }
+
+
                 }
             </div>
         </div>

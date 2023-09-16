@@ -7,7 +7,7 @@ using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
-    
+    [Authorize(Policy = "AdminObserverPolicy")]
     [Area("BlogApi")]
     public class ArticleController : _BaseController<ArticleController>
     {
@@ -19,14 +19,12 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 
         }
 
-        [Authorize(Roles = "Member,SuperAdmin")]
         public async Task<IActionResult> List()
         {
             var response = await _articleServiceApi.GetAllArticleAsync();
             return HandleResponse(response, BlogCrudType.Select);
         }
 
-        [Authorize(Roles = "Member,SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> ArticleUpdate(int id)
@@ -46,14 +44,14 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Update);
         }
 
-        [Authorize(Roles = "Member,SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> ArticleAdd()
         {
             var myClient = HttpContext.Items["Token"] as HttpClient;
             var categories = await _articleServiceApi.GetCategoriesForDropDown(myClient!);
-            return View(new ArticleAddVM { Categories = categories });
+            return HandleResponse(categories, BlogCrudType.SelectSingle);
+
         }
 
         [Authorize(Roles = "SuperAdmin")]

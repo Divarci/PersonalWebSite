@@ -16,6 +16,10 @@ namespace EntityLayer.WebApplication.ViewModels.ResumeViewModel
         [DisplayName("Description")]
         public string Description { get; set; } = null!;
 
+        //Status
+        public bool IsPublished { get; set; }
+        public bool IsEdited { get; set; }
+
 
     }
 }

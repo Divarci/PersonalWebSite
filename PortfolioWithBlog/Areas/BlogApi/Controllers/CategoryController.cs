@@ -9,6 +9,7 @@ using System.Data;
 
 namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 {
+    [Authorize(Policy = "AdminObserverPolicy")]
     [Area("BlogApi")]
     public class CategoryController : _BaseController<CategoryController>
     {
@@ -19,14 +20,12 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             _categoryServiceApi = categoryServiceApi;
         }
 
-        [Authorize(Roles = "Member,SuperAdmin")]
         public async Task<IActionResult> List()
         {
             var response = await _categoryServiceApi.GetCategoryListAsync();
             return HandleResponse(response, BlogCrudType.Select);
         }
 
-        [Authorize(Roles = "Member,SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public async Task<IActionResult> CategoryUpdate(int id)
@@ -46,7 +45,6 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
             return HandleResponse(response, BlogCrudType.Update);
         }
 
-        [Authorize(Roles = "Member, SuperAdmin")]
         [ServiceFilter(typeof(RequestToApi))]
         [HttpGet]
         public IActionResult CategoryAdd()

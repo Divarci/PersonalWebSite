@@ -6,6 +6,7 @@
         Create = 201,
         Update = 204,
         Select = 200,
-
+        SelectSingle = 202,
+        
     }
 }

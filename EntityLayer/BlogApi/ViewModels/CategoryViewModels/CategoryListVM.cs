@@ -1,4 +1,6 @@
-﻿namespace EntityLayer.BlogApi.ViewModels.CategoryViewModels
+﻿using EntityLayer.BlogApi.ViewModels.ArticleViewModels;
+
+namespace EntityLayer.BlogApi.ViewModels.CategoryViewModels
 {
     public class CategoryListVM
     {
@@ -11,5 +13,8 @@
 
         //category section
         public string Name { get; set; } = null!;
+
+        //Article List
+        public List<ArticleListVM>? Articles { get; set; }
     }
 }

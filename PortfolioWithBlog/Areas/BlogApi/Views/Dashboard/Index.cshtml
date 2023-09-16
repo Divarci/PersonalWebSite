@@ -3,6 +3,12 @@
     ViewData["Title"] = "Index";
     Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
 }
+
+<div class="pagetitle">
+    <div class="pagetitle" style="display: flex; align-items: center;">
+        <h1>Latest Articles</h1>
+    </div >
+</div>
 <div class="row">
     @foreach (var item in Model)
     {

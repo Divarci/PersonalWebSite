@@ -5,20 +5,19 @@ using ServiceLayer.BlogApiClient.Services;
 
 namespace PortfolioWithBlog.Controllers
 {
-    public class BlogApiController : _BaseController<ArticleController>
+    public class BlogApiController : _BaseController<CategoryController>
     {
-        private readonly ArticleServiceApi _articleServiceApi;
+        private readonly CategoryServiceApi _categoryServiceApi;
 
-        public BlogApiController(ArticleServiceApi articleServiceApi)
+        public BlogApiController(CategoryServiceApi categoryServiceApi)
         {
-            _articleServiceApi = articleServiceApi;
+            _categoryServiceApi = categoryServiceApi;
         }
 
-        public async Task<IActionResult> Index(short page)
+        public async Task<IActionResult> Index()
         {
-            var articlePagination = await _articleServiceApi.ArticlePaginationAsync(page);
-            ViewBag.Count = articlePagination.Item3;
-            return HandleResponse((articlePagination.Item1,articlePagination.Item2), BlogCrudType.Select);
+            var categories = await _categoryServiceApi.GetCategoryListAsync();
+            return HandleResponse(categories, BlogCrudType.Select);
         }
     }
 }

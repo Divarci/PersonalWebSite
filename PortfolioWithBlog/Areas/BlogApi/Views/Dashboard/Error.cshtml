@@ -6,12 +6,20 @@
 }
 
 
-<h1>@Model.StatusCode</h1>
-@foreach (var item in Model.Error)
-{
-    <h1>@item</h1>
-}
 
+<div class="container">
+
+    <section class="section error-404 d-flex flex-column align-items-center justify-content-center">
+        <h1>@Model.StatusCode</h1>
+        @foreach (var item in Model.Error)
+        {
+            <h2>@item</h2>
+        }
+
+        <img src="~/NiceAdmin/assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
+    </section>
+
+</div>
 
 
 

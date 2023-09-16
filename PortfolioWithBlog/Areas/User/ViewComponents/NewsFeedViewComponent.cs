@@ -15,7 +15,7 @@ namespace PortfolioWithBlog.Areas.User.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var newsFeedList = await _newsFeedService.GetNewsListForUserAsync().OrderByDescending(x=>x.CreatedDate).Take(5).ToListAsync();
+            var newsFeedList = await _newsFeedService.GetLastFiveNewsListForUserAsync();
             return View(newsFeedList);
         }
     }
