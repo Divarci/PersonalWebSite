@@ -138,7 +138,7 @@ namespace ServiceLayer.WebApplication.Services.Concrete
             var newsList = await _newsFeedRepository.GetAll().ProjectTo<NewsFeedUserListVM>(_mapper.ConfigurationProvider).ToListAsync();
             if (newsList.Count != 0)
             {
-                var orderedList = newsList.OrderByDescending(x => x.CreatedDate).Take(5).ToList();
+                var orderedList = newsList.OrderByDescending(x => Convert.ToDateTime(x.CreatedDate)).Take(5).ToList();
                 return orderedList;
             }
             return newsList!;

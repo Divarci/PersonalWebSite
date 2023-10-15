@@ -1,8 +1,7 @@
 ﻿using CoreLayer.BaseEntity;
-using CoreLayer.Errors;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using RepositoryLayer.Repository.Generic.Abstract;
+using ServiceLayer.WebApplication.Exceptions;
 
 namespace ServiceLayer.WebApplication.Filters
 {
@@ -23,9 +22,7 @@ namespace ServiceLayer.WebApplication.Filters
             //if value is null return error. On address bar it might be typed in non-digit character
             if (value == null)
             {
-                var errorVMForUnknownId = new ErrorVM($"Data {value} is invalid. Please double-check the entered information and try again.",404);
-                context.Result = new RedirectToActionResult("ValueNotFound", "Dashboard", errorVMForUnknownId);
-                return;
+                throw new ClientSideExceptions($"Data {value} is invalid. Please double-check the entered information and try again.");               
             }
 
             // if value is not null we check is it an int value or not
@@ -48,8 +45,8 @@ namespace ServiceLayer.WebApplication.Filters
             }
 
             //if it is not data does not exist
-            var errorVModel = new ErrorVM($"Data {id} is not found. Please double-check the entered information and try again.", 404);
-            context.Result = new RedirectToActionResult("ValueNotFound", "Dashboard", errorVModel);
+            throw new ClientSideExceptions($"Data {id} is not found. Please double-check the entered information and try again.");                       
+           
         }
     }
 }

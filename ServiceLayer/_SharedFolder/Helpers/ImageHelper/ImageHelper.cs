@@ -112,7 +112,7 @@ namespace ServiceLayer._SharedFolder.Helpers.ImageHelper
                 Directory.CreateDirectory($"{wwwroot}/{imagesFolder}/{folderName}");
 
             //name fixing area
-            string fileExtension = Path.GetExtension(imageFile.FileName);
+            string fileExtension = Path.GetExtension(imageFile.FileName).ToLower();
             if (fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".png")
             {
                 return new GenericImageVM { Error = "You have to upload a JPG,JPEG or PNG" };

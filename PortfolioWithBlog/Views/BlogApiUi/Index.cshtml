@@ -88,7 +88,7 @@
         </section><!-- End Blog Section -->
         <!-- ======= Portfolio Section ======= -->
         <section class="portfolio">
-            <div class="blog container">
+            <div class="container">
                 <!-- ======= Category Section ======= -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -109,7 +109,11 @@
                     {
                         foreach (var article in categories.Articles!)
                         {
-                            <article class="entry col-lg-4 portfolio-wrap filter-@article.Category.Name">
+
+                            <div class="col-lg-4 portfolio-wrap filter-@article.Category.Name">
+
+                                <div class="blog">
+                                    <div class="entry">
 
                                 <div class="entry-img">
                                     <img src="data:image/jpeg;base64,@Convert.ToBase64String(article.FileByte)" alt="@article.Title" class="img-fluid">
@@ -135,8 +139,10 @@
                                         <a href="@article.YoutubeUrl">Watch Series</a>
                                     </div>
                                 </div>
+                                </div>
 
-                            </article>
+                            </div>
+                            </div>
                         }
                     }
 

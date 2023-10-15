@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using RepositoryLayer.Extensions;
 using ServiceLayer._SharedFolder.Extensions;
 using ServiceLayer._SharedFolder.Middlewares;
@@ -23,16 +25,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-   
-
-
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-//app.UseStatusCodePagesWithReExecute("/Home/PageNotFound");
-//app.UseExceptionHandler("/Home/GeneralException");
-//app.UseMiddleware<ExceptionHandlerWithLogging>();
-
+//app.UseStatusCodePagesWithRedirects("/Home/PageNotFound");
+app.UseExceptionHandler("/Error/GeneralException");
+app.UseStatusCodePagesWithReExecute("/Error/PageNotFound");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -70,7 +68,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllerRoute(
         name: "Home",
         pattern: "{controller=Home}/{action=Index}/{id?}");
-    
+
 });
 
 

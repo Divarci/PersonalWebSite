@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using ServiceLayer._SharedFolder.Messages.ToastyNotification;
+using ServiceLayer.BlogApiClient.Exceptions;
 using ServiceLayer.BlogApiClient.Filters;
 using ServiceLayer.BlogApiClient.Services;
 

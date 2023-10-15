@@ -1706,7 +1706,7 @@ h6,
                 font-size: 28px;
                 font-weight: bold;
                 padding: 0;
-                margin: 0 0 20px 0;
+                margin: 20px 0 20px 0;
             }
 
                 .blog .entry .entry-title a {
@@ -1749,8 +1749,11 @@ h6,
                     line-height: 1;
                 }
 
+
             .blog .entry .entry-content p {
                 line-height: 24px;
+                height: 290px;
+                overflow: hidden;
             }
 
             .blog .entry .entry-content .read-more {

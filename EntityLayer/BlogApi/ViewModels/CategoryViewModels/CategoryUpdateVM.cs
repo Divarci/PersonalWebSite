@@ -1,4 +1,6 @@
-﻿namespace EntityLayer.BlogApi.ViewModels.CategoryViewModels
+﻿using System.ComponentModel;
+
+namespace EntityLayer.BlogApi.ViewModels.CategoryViewModels
 {
     public class CategoryUpdateVM
     {
@@ -6,6 +8,8 @@
         public int Id { get; set; }
 
         //category section
+
+        [DisplayName("Title")]
         public string Name { get; set; } = null!;
 
         //Information

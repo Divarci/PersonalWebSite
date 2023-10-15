@@ -4,8 +4,17 @@
     Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CategoryAdd</h1>
-
+<div class="pagetitle">
+    <div class="pagetitle" style="display: flex; align-items: center;">
+        <h1>New Category</h1>
+    </div><!-- End Page Title -->
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="BlogApi" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+            <li class="breadcrumb-item active">New Category</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
 
 <form asp-area="BlogAPi" asp-controller="Category" asp-action="CategoryAdd" method="post" class="row g-12">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>

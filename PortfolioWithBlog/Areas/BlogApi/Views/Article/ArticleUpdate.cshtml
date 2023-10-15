@@ -4,23 +4,23 @@
     Layout = "~/Areas/BlogApi/Views/Shared/_Layout.cshtml";
 }
 
-<h1>
-    <div class="pagetitle">
-        <div class="pagetitle" style="display: flex; align-items: center;">
-            <h1>Update Article</h1>
-        </div><!-- End Page Title -->
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-area="BlogApi" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
-                <li class="breadcrumb-item active">Update Article</li>
-            </ol>
-        </nav>
+
+<div class="pagetitle">
+    <div class="pagetitle" style="display: flex; align-items: center;">
+        <h1>Update Article</h1>
     </div><!-- End Page Title -->
-</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-area="BlogApi" asp-controller="Dashboard" asp-action="index">Dashboard</a></li>
+            <li class="breadcrumb-item active">Update Article</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
 
 <form asp-area="BlogAPi" asp-controller="Article" asp-action="ArticleUpdate" method="post" class="row g-12" enctype="multipart/form-data">
     <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="RowVersion" />    
+    <input type="hidden" asp-for="RowVersion" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="col-md-6">

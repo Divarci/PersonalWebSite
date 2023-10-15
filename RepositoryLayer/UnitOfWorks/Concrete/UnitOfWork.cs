@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using RepositoryLayer.Context;
 using RepositoryLayer.Repository.Generic.Abstract;
@@ -21,20 +20,14 @@ namespace RepositoryLayer.UnitOfWorks.Concrete
         // savechange with concurrency exceptions catched
         public string Commit()
         {
-            
             try
             {
-                _context.SaveChanges();
+                _context.SaveChangesAsync();
                 return string.Empty;
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
-                if (ex is DbUpdateConcurrencyException)
-                {
-                    return "Data has just been changed by another User. Please Try Again.";
-                }
-
-                return ex.Message.ToString();
+                return "This data has been changed by anouther user. Please try again!";
             }
         }
 
@@ -46,23 +39,12 @@ namespace RepositoryLayer.UnitOfWorks.Concrete
                 await _context.SaveChangesAsync();
                 return string.Empty;
             }
-            catch (Exception ex)
+            catch (DbUpdateConcurrencyException ex)
             {
-                if (ex is DbUpdateConcurrencyException)
-                {
-                    return "Data has just been changed by another User. Please Try Again.";
-                }
-
-                if (ex.InnerException is SqlException sqlException && sqlException.Number == 547)
-                    return "Please delete all relevant datas before delete this resume!";
-
-                return ex.Message.ToString();
-
+                return "This data has been changed by anouther user. Please try again!";
             }
-
+            
         }
-
-
 
 
         //dispose after commit

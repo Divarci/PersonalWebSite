@@ -33,6 +33,7 @@ namespace RepositoryLayer.Repository.Generic.Concrete
         public void Delete(T entity)
         {
             _dbset.Remove(entity);
+           
         }
 
         public IQueryable<T> GetAll()

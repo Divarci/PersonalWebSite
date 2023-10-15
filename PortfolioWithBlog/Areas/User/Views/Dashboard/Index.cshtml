@@ -24,12 +24,12 @@
                 <div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img src="~/images/@Model.Last().FileName" class="img-fluid rounded-start" alt="...">
+                            <img src="~/images/@Model.FirstOrDefault()!.FileName" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">@Model.Last().Title</h5>
-                                <p class="card-text">@Model.Last().Description</p>
+                                <h5 class="card-title">@Model.FirstOrDefault()!.Title</h5>
+                                <p class="card-text">@Model.FirstOrDefault()!.Description</p>
                             </div>
                         </div>
                     </div>

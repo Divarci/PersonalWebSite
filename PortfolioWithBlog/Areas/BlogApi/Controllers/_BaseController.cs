@@ -30,7 +30,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 
             if (statusCode == ((short)crudType))
             {
-                if (statusCode == 200)
+                if (statusCode == 200) 
                 {
                     return View(response.Item1.Data);
                 }
@@ -63,7 +63,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
 
             if (statusCode == 400)
             {
-                ModelState.AddModelErrorList(response.Item1.Errors!);
+                _toasty.AddErrorToastMessage(response.Item1.Errors!.FirstOrDefault(), new ToastrOptions { Title = "Opps!" });
                 return View(response.Item1.Data);
             }
 
@@ -72,7 +72,7 @@ namespace PortfolioWithBlog.Areas.BlogApi.Controllers
                 throw new BlogApiExceptions(response.Item1.Errors!.FirstOrDefault());
             }
 
-            return RedirectToAction("Error", "Dashboard", new { Area = "BlogApi", errors = response.Item1.Errors, code = statusCode });
+            return RedirectToAction("ApiError", "Error", new { Area = "", errors = response.Item1.Errors, code = statusCode });
         }
     }
 }

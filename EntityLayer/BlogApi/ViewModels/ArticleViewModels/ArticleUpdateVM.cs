@@ -1,5 +1,6 @@
 ﻿using EntityLayer.BlogApi.ViewModels.CategoryViewModels;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace EntityLayer.BlogApi.ViewModels.ArticleViewModels
@@ -17,9 +18,16 @@ namespace EntityLayer.BlogApi.ViewModels.ArticleViewModels
         public byte[] RowVersion { get; set; } = null!;
 
         //Article Section
+        [DisplayName("Title")]
         public string Title { get; set; } = null!;
+
+        [DisplayName("Content")]
         public string Content { get; set; } = null!;
+
+        [DisplayName("Author")]
         public string Author { get; set; } = null!;
+
+        [DisplayName("Youtube Url")]
         public string? YoutubeUrl { get; set; }
 
 
@@ -27,7 +35,8 @@ namespace EntityLayer.BlogApi.ViewModels.ArticleViewModels
         public IFormFile? Photo { get; set; }
 
         //category relation
-        public int CategoryId { get; set; }
+        [DisplayName("Category")]
+        public int? CategoryId { get; set; }
         public List<CategoryListVM>? Categories { get; set; }
     }
 }

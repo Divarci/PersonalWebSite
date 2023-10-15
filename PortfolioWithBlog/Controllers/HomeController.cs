@@ -1,8 +1,10 @@
-﻿using CoreLayer.Errors;
-using EntityLayer.WebApplication.ViewModels.MessageViewModel;
+﻿using EntityLayer.WebApplication.ViewModels.MessageViewModel;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NToastNotify;
 using ServiceLayer.WebApplication.Services.Abstract;
 
 namespace PortfolioWithBlog.Controllers
@@ -24,9 +26,9 @@ namespace PortfolioWithBlog.Controllers
         {
             var captcha = _messageService.CaptchaGenerator();
             return View(new MessageAddVM { CatpchaGenerated = captcha });
-         
+
         }
-        
+
         //Send Message Partial View
         [HttpGet]
         public PartialViewResult SendMessage()
@@ -49,14 +51,6 @@ namespace PortfolioWithBlog.Controllers
             }
         }
 
-        //Exception Pages
-        public IActionResult PageNotFound()
-        {
-            return View();
-        }
-        public IActionResult GeneralException()
-        {
-            return View();
-        }
+      
     }
 }
