@@ -42,5 +42,5 @@ This combination of technologies enables the development of a robust, modular, a
 
 ## Live Web Page
 
- ⭕ [Click here to see Live Web Page]([https://www.hasandivarci.com](https://www.hasandivarci.com/BlogApiUi)https://www.hasandivarci.com/BlogApiUi) 
+ ⭕ [Click here to see Live Web Page](https://hasandivarci.com/) 
  
